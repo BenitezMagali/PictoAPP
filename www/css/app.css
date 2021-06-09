@@ -83,5 +83,22 @@
 * {
 	font-family: 'Poppins', Arial, sans-serif;
 }
+.hola {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: aquamarine;
+  margin-bottom: 16px;
+}
+img{
+  width: auto; height: auto;
+  max-width: 200px;
+  max-height: 200px;
+}
 
+.button {
+  margin: 5px !important;
+}
 

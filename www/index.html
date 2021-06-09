@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <!--
         Customize this policy to fit your own app's needs. For more guidance, see:
@@ -10,11 +11,13 @@
             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
 
     <!-- Required meta tags-->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
@@ -32,39 +35,71 @@
     <link rel="stylesheet" href="css/app.css">
 </head>
 
-<body>
+<body class="color-theme-teal">
     <div id="app">
+        <!--panel izquierdo= funcionalidades básicas sin inicio de sesión-->
+        <div class="panel panel-left panel-cover panel-resizable panel-init">
+            <div class="block">
+                <p>Left Panel content here</p>
+                <p><a class="panel-close" href="#">Close me</a></p>
+                <p><a class="">Open Right Panel</a></p>
+            </div>
+        </div>
+        <!--Panel izquierdo= acerca de la app y contacto/reportar un problema-->
+        <div class="panel panel-right panel-right-1 panel-cover panel-resizable panel-init">
+            <div class="block">
+                <p>Right Panel content here</p>
+                <p><a class="panel-close" href="#">Close me</a></p>
+                <p><a class="panel-open" href="#" data-panel="left">Open Left Panel</a></p>
+            </div>
+        </div>
         <!-- Statusbar overlay -->
         <div class="statusbar"></div>
-    
         <!-- Your main view, should have "view-main" class -->
         <div class="view view-main">
-       
             <!-- Top Navbar -->
-            <div class="navbar">
+            <div class="navbar color-theme-">
                 <div class="navbar-bg"></div>
                 <div class="navbar-inner">
-                    <div class="left"><i class="icon icon-back"></i></div>
-                    <div class="title">Page Title</div>
-                    <div class="right"><i class="icon icon-forward"></i></div>
+                    <div class="left"><a class="button panel-open" href="#" data-panel=".panel-left"><i
+                                class="icon material-icons">menu</i></a></div>
+                    <div class="title">¡Hola!</div>
+                    <div class="right"><a class="button panel-open" href="#" data-panel=".panel-right-1"><i
+                                class="icon material-icons">info</i></a></div>
                 </div>
             </div>
-    
-            <!-- Toolbar -->
+            <!-- Toolbar 
             <div class="toolbar toolbar-bottom">
                 <div class="toolbar-inner">
-                <!-- Toolbar links -->
-                <a href="#" class="link">Link 1</a>
-                <a href="#" class="link">Link 2</a>
+                    <!-- Toolbar links 
+                    <a href="#" class="link">Link 1</a>
+                    <a href="#" class="link">Link 2</a>
                 </div>
-            </div>
-        
-        <!-- Initial Page, "data-name" contains page name -->
+            </div> -->--> 
+            <!-- Initial Page, "data-name" contains page name -->
             <div data-name="index" class="page">
                 <!-- Scrollable page content -->
                 <div class="page-content">
                     <div class="block">
-                        <p>Page content goes here</p>
+                        <center>
+                            <h3>¡Bienvenidx a PictoAPP!</h3>
+                            <div class="hola"><img src="img/hola.png" class="img.peq" alt="HOLA"></div>
+                        <p>Seleccioná una opción:</p>
+                        </center>
+                        <div>
+                            <a href="#" class="button button-fill login-screen-open"
+                                data-login-screen=".login-screen" id="login">Iniciar sesión</a>
+                        </div>
+                        <div id="resgistro">
+                            <a href="/registro.html/" class="button button-fill login-screen-open"
+                                data-login-screen=".login-screen">Registrarse</a>
+                        </div>
+                        <div id="login">
+                            <a href="/agenda.html/" class="button button-fill login-screen-open"
+                                data-login-screen=".login-screen">Continuar sin registrarse</a>
+                        </div>
+
+
                         <!-- Link to another page -->
                         <a href="/about/" data-view=".page-content">About app</a>
 
@@ -86,7 +121,7 @@
                                         </div>
                                     </div>
                                     <div class="page-content">
-                                      ...
+                                        ...
                                     </div>
                                 </div>
                             </div>
@@ -95,12 +130,85 @@
                 </div>
             </div>
         </div>
+        <div class="view tab tab-active" id="">
+            <div class="page">
+                <div class="page-content login-screen-content">
+                  <div class="login-screen-title">My App</div>
+                  <!-- Open in login screen that already in DOM-->
+                  <a href="#" class="button button-fill login-screen-open" data-login-screen=".login-screen"></a>
+                  <form>
+                    <div class="list">
+                      <ul>
+                        <li class="item-content item-input">
+                          <div class="item-inner">
+                            <div class="item-title item-label">Usuario</div>
+                            <div class="item-input-wrap">
+                              <input type="text" name="username" placeholder="Usuario o e-mail" />
+                            </div>
+                          </div>
+                        </li>
+                        <li class="item-content item-input">
+                          <div class="item-inner">
+                            <div class="item-title item-label">Contraseña</div>
+                            <div class="item-input-wrap">
+                              <input type="password" name="password" placeholder="Contraseña" />
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="list">
+                      <ul>
+                        <li><a class="list-button" href="#">Iniciar sesión</a></li>
+                      </ul>
+                      <div class="block-footer">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <p><a class="link login-screen-close" href="#">Volver</a></p>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+        </div>
     </div>
 
+    <!--<script>
+        export default (props, { $, $f7, $f7ready }) => {
+            $f7ready(() => {
+                // Dom Events
+                $('.panel-left').on('panel:open', function () {
+                    console.log('Panel left: open');
+                });
+                $('.panel-left').on('panel:opened', function () {
+                    console.log('Panel left: opened');
+                });
+            })
 
+            return $render;
+        }
+    </script>-->
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="lib/framework7/framework7-bundle.min.js"></script>
     <script type="text/javascript" src="js/my-app.js"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+   <!-- <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyB1YTB3xWsunQ-xoxlSM09YUSItCNuf7Cc",
+            authDomain: "pictoapp-868b5.firebaseapp.com",
+            projectId: "pictoapp-868b5",
+            storageBucket: "pictoapp-868b5.appspot.com",
+            messagingSenderId: "19576592604",
+            appId: "1:19576592604:web:6684a8d61ec2e23d867c19"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>-->
 </body>
 
 </html>

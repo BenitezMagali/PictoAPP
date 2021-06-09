@@ -1,0 +1,67 @@
+<div class="login-screen" data-name="login-screen">
+    <div class="view">
+      <div class="page">
+        <div class="page-content login-screen-content">
+          <div class="login-screen-title">My App</div>
+          <!-- Open in login screen that already in DOM-->
+          <a href="#" class="button button-fill login-screen-open" data-login-screen=".login-screen"></a>
+          <form>
+            <div class="list">
+              <ul>
+                <li class="item-content item-input">
+                  <div class="item-inner">
+                    <div class="item-title item-label">Usuario</div>
+                    <div class="item-input-wrap">
+                      <input type="text" name="username" placeholder="Usuario o e-mail" />
+                    </div>
+                  </div>
+                </li>
+                <li class="item-content item-input">
+                  <div class="item-inner">
+                    <div class="item-title item-label">Contraseña</div>
+                    <div class="item-input-wrap">
+                      <input type="password" name="password" placeholder="Contraseña" />
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="list">
+              <ul>
+                <li><a class="list-button" href="#">Iniciar sesión</a></li>
+              </ul>
+              <div class="block-footer">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p><a class="link login-screen-close" href="#">Volver</a></p>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+<script>
+  $$(document).on('page:init', '.page[data-name="login-screen"]' , function(e){
+  export default (props, ctx) => {
+    const { $ } = ctx;
+    // Login Screen-Modal DOM events
+    $('.login-screen').on('loginscreen:open', function (e) {
+      console.log('Login screen open')
+    });
+    $('.login-screen').on('loginscreen:opened', function (e) {
+      console.log('Login screen opened')
+    });
+    $('.login-screen').on('loginscreen:close', function (e) {
+      console.log('Login screen close')
+    });
+    $('.login-screen').on('loginscreen:closed', function (e) {
+      console.log('Login screen closed')
+    });
+
+    
+
+    return $render;
+  }
+
+})
+</script>

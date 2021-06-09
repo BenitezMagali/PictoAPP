@@ -16,9 +16,21 @@ var app = new Framework7({
     // Add default routes
     routes: [
       {
-        path: '/about/',
+        path: '/agenda/',
         url: 'about.html',
       },
+      {
+        path: '/index/',
+        url: 'index.html',
+      },
+      {
+        path: '/login-screen/',
+        url: 'login-screen.html',
+      },
+      {
+        path: '/registro/',
+        url: 'registro.html',
+      }
     ]
     // ... other parameters
   });
@@ -34,6 +46,7 @@ $$(document).on('deviceready', function() {
 $$(document).on('page:init', function (e) {
     // Do something here when page loaded and initialized
     console.log(e);
+    
 })
 
 // Option 2. Using live 'page:init' event handlers for each page
@@ -41,4 +54,24 @@ $$(document).on('page:init', '.page[data-name="about"]', function (e) {
     // Do something here when page with data-name="about" attribute loaded and initialized
     console.log(e);
     alert('Hello');
+})
+
+$$(document).on('page:init', '.page[data-name="index"]', function (e) {
+  $$('#login').on('click', function () {
+    console.log("click sí")
+    mainView.router.navigate('/login-screen/')
+  });
+
+
+  var email = "usuario@dominio.com";
+  var clave = "1234Abc";
+/*
+  firebase.auth().createUserWithEmailAndPassword(email, clave)
+  .then(function(){
+    console.log("que paso?")
+  })
+  .catch(function(error){ //este error es un json
+    console.error(error.code)
+    console.error(error.mensaje)
+  });*/
 })
