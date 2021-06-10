@@ -11,9 +11,9 @@
             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
-    <meta http-equiv="Content-Security-Policy"
+   <!-- <meta http-equiv="Content-Security-Policy"
         content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
-
+-->
     <!-- Required meta tags-->
     <meta charset="utf-8">
     <meta name="viewport"
@@ -63,7 +63,7 @@
                 <div class="navbar-inner">
                     <div class="left"><a class="button panel-open" href="#" data-panel=".panel-left"><i
                                 class="icon material-icons">menu</i></a></div>
-                    <div class="title">¡Hola!</div>
+                    <div class="title">PictoAPP</div>
                     <div class="right"><a class="button panel-open" href="#" data-panel=".panel-right-1"><i
                                 class="icon material-icons">info</i></a></div>
                 </div>
@@ -75,7 +75,7 @@
                     <a href="#" class="link">Link 1</a>
                     <a href="#" class="link">Link 2</a>
                 </div>
-            </div> -->--> 
+            </div> -->
             <!-- Initial Page, "data-name" contains page name -->
             <div data-name="index" class="page">
                 <!-- Scrollable page content -->
@@ -90,13 +90,11 @@
                             <a href="#" class="button button-fill login-screen-open"
                                 data-login-screen=".login-screen" id="login">Iniciar sesión</a>
                         </div>
-                        <div id="resgistro">
-                            <a href="/registro.html/" class="button button-fill login-screen-open"
-                                data-login-screen=".login-screen">Registrarse</a>
+                        <div>
+                            <a href="#" class="button button-fill" id="registro">Registrarse</a>
                         </div>
-                        <div id="login">
-                            <a href="/agenda.html/" class="button button-fill login-screen-open"
-                                data-login-screen=".login-screen">Continuar sin registrarse</a>
+                        <div >
+                            <a href="#" class="button button-fill" id="agenda">Continuar sin registrarse</a>
                         </div>
 
 
@@ -192,11 +190,8 @@
     <script type="text/javascript" src="js/my-app.js"></script>
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
-
-    <!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
-
-   <!-- <script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-auth.js"></script>
+    <script>
         // Your web app's Firebase configuration
         var firebaseConfig = {
             apiKey: "AIzaSyB1YTB3xWsunQ-xoxlSM09YUSItCNuf7Cc",
@@ -208,7 +203,7 @@
         };
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
-    </script>-->
+    </script>
 </body>
 
 </html>

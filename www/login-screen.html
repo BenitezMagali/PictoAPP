@@ -1,11 +1,8 @@
-<div class="login-screen" data-name="login-screen">
-    <div class="view">
-      <div class="page">
+<div class="view">
+      <div class="page" data-name="login-screen">
         <div class="page-content login-screen-content">
-          <div class="login-screen-title">My App</div>
+          <div class="login-screen-title">Iniciar sesión</div>
           <!-- Open in login screen that already in DOM-->
-          <a href="#" class="button button-fill login-screen-open" data-login-screen=".login-screen"></a>
-          <form>
             <div class="list">
               <ul>
                 <li class="item-content item-input">
@@ -28,40 +25,14 @@
             </div>
             <div class="list">
               <ul>
-                <li><a class="list-button" href="#">Iniciar sesión</a></li>
+                <li><a class="list-button" href="#" id="iniciasesion">Iniciar sesión</a></li>
               </ul>
               <div class="block-footer">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <p><a class="link login-screen-close" href="#">Volver</a></p>
+                <p>¿No tenés cuenta? ¡Registrate!</p>
+                <p><a class="link login-screen-close" href="#" id="volver">Volver</a></p>
               </div>
             </div>
-          </form>
         </div>
       </div>
     </div>
   </div>
-<script>
-  $$(document).on('page:init', '.page[data-name="login-screen"]' , function(e){
-  export default (props, ctx) => {
-    const { $ } = ctx;
-    // Login Screen-Modal DOM events
-    $('.login-screen').on('loginscreen:open', function (e) {
-      console.log('Login screen open')
-    });
-    $('.login-screen').on('loginscreen:opened', function (e) {
-      console.log('Login screen opened')
-    });
-    $('.login-screen').on('loginscreen:close', function (e) {
-      console.log('Login screen close')
-    });
-    $('.login-screen').on('loginscreen:closed', function (e) {
-      console.log('Login screen closed')
-    });
-
-    
-
-    return $render;
-  }
-
-})
-</script>
