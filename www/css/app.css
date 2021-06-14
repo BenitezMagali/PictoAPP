@@ -96,9 +96,34 @@ img{
   width: auto; height: auto;
   max-width: 200px;
   max-height: 200px;
+  min-width: 50px;
+  min-height: 50px;
 }
 
 .button {
   margin: 5px !important;
 }
+.hacer1{
+  background-color: aquamarine;
+  width: 50px;
+  height: 50px;
+  display: flexbox;
+  image-orientation: inherit;
+  size: fit-content;
+  float: left;
+}
+.haciendo{
+  width: 250px;
+  height: 250px;
+
+}
+.hecho1{
+  background-color: lightcoral;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  float: inline-start;
+  
+}
+
 
