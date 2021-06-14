@@ -1,5 +1,4 @@
-<div class="view">
-      <div class="page" data-name="login-screen">
+<div class="page no-navbar" data-name="login-screen">
         <div class="page-content login-screen-content">
           <div class="login-screen-title">Iniciar sesión</div>
           <!-- Open in login screen that already in DOM-->
@@ -9,7 +8,7 @@
                   <div class="item-inner">
                     <div class="item-title item-label">Usuario</div>
                     <div class="item-input-wrap">
-                      <input type="text" name="username" placeholder="Usuario o e-mail" />
+                      <input type="text" name="username" placeholder="Usuario o e-mail" id="usuario"/>
                     </div>
                   </div>
                 </li>
@@ -17,7 +16,7 @@
                   <div class="item-inner">
                     <div class="item-title item-label">Contraseña</div>
                     <div class="item-input-wrap">
-                      <input type="password" name="password" placeholder="Contraseña" />
+                      <input type="password" name="password" placeholder="Contraseña" id="contra"/>
                     </div>
                   </div>
                 </li>
@@ -25,14 +24,13 @@
             </div>
             <div class="list">
               <ul>
-                <li><a class="list-button" href="#" id="iniciasesion">Iniciar sesión</a></li>
+                <li><a class="list-button" href="#" id="login" data-view=".page-content">Iniciar sesión</a></li>
               </ul>
               <div class="block-footer">
-                <p>¿No tenés cuenta? ¡Registrate!</p>
-                <p><a class="link login-screen-close" href="#" id="volver">Volver</a></p>
+                <p>¿No tenés cuenta?</p>
+                <a href="/registro/" data-view=".page-content">¡Registrate!</a>
+                <p><a class="link login-screen-close" href="/index/" id="volver" data-view=".page-content">Volver</a></p>
               </div>
             </div>
         </div>
       </div>
-    </div>
-  </div>

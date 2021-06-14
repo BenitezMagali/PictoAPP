@@ -16,12 +16,13 @@ var app = new Framework7({
     // Add default routes
     routes: [
       {
-        path: '/agenda/',
-        url: 'agenda.html',
+        path: '/agenda1/',
+        url: 'agenda1.html',
       },
       {
         path: '/index/',
         url: 'index.html',
+        pageName: 'index',
       },
       {
         path: '/login-screen/',
@@ -43,32 +44,36 @@ $$(document).on('deviceready', function() {
 });
 // Option 1. Using one 'page:init' handler for all pages
 $$(document).on('page:init', function (e) {
+  app.navbar.show(".navbar", true)
     // Do something here when page loaded and initialized
     console.log(e);
     
 })
 //Página de inicio
 $$(document).on('page:init', '.page[data-name="index"]', function (e) {
+  
   $$('#login').on('click', function () {
     console.log("click sí");
-    mainView.router.navigate('/login-screen/');
-  });
+    mainView.router.navigate('/login-screen/')
+  })
   $$('#registro').on('click', function () {
     console.log("click sí");
-    mainView.router.navigate('/registro/');
-  });
+    mainView.router.navigate('/registro/')
+  })
   $$('#agenda').on('click', function () {
     console.log("click sí");
-    mainView.router.navigate('/agenda/');
-  });
-})
+    mainView.router.navigate('/agenda/')
+  })
+  
+  })
   //Página de inicio de sesión 
 $$(document).on('page:init', '.page[data-name="login-screen"]', function (e) {
+  app.navbar.hide('.navbar',true, false)
   $$('#volver').on('click', function () {
     console.log("click sí");
     mainView.router.navigate('/index/');
   }) 
-  firebase.auth().signInWithEmailAndPassword(email, password)
+  /*firebase.auth().signInWithEmailAndPassword(email, password)
   .then((userCredential) => {
     // Signed in
     var user = userCredential.user;
@@ -81,12 +86,14 @@ $$(document).on('page:init', '.page[data-name="login-screen"]', function (e) {
   .catch((error) => {
     var errorCode = error.code;
     var errorMessage = error.message;
-  })
+  })*/
   
 
 
 //Página de registro
   $$(document).on('page:init', '.page[data-name="registro"]', function (e) {
+    console.log("voy a intentar registrar al usuario")
+    app.navbar.hide('.navbar',true, false)
   var email = "usuario@dominio.com";
   var clave = "1234Abc";
   firebase.auth().createUserWithEmailAndPassword(email, clave)

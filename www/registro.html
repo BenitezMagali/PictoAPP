@@ -5,9 +5,8 @@
         <li>
           <div class="item-content item-input">
             <div class="item-inner">
-              <div class="item-title item-label">Nombre</div>
               <div class="item-input-wrap">
-                <input type="text" name="name" placeholder="Nombre" />
+                <input type="text" name="name" placeholder="Nombre de usuario" id="usuario"/>
               </div>
             </div>
           </div>
@@ -15,9 +14,8 @@
         <li>
           <div class="item-content item-input">
             <div class="item-inner">
-              <div class="item-title item-label">Usuario</div>
               <div class="item-input-wrap">
-                <input type="user" name="usuario" placeholder="usuario" />
+                <input type="email" name="email" placeholder="E-mail" id="mail"/>
               </div>
             </div>
           </div>
@@ -25,9 +23,8 @@
         <li>
           <div class="item-content item-input">
             <div class="item-inner">
-              <div class="item-title item-label">E-mail</div>
               <div class="item-input-wrap">
-                <input type="email" name="email" placeholder="E-mail" id="email"/>
+                <input type="password" name="password" placeholder="Contraseña" id="contra"/>
               </div>
             </div>
           </div>
@@ -35,19 +32,8 @@
         <li>
           <div class="item-content item-input">
             <div class="item-inner">
-              <div class="item-title item-label">Contraseña</div>
               <div class="item-input-wrap">
-                <input type="password" name="password" placeholder="Contraseña" id="contraseña"/>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="item-content item-input">
-            <div class="item-inner">
-              <div class="item-title item-label">Repetir contraseña</div>
-              <div class="item-input-wrap">
-                <input type="password" name="password" placeholder="Repetir Contraseña" id="repetir"/>
+                <input type="password" name="password" placeholder="Repetir Contraseña" id="repcontra"/>
               </div>
             </div>
           </div>
@@ -58,16 +44,18 @@
               <div class="item-title item-label">Soy</div>
               <div class="item-input-wrap">
                 <select name="gender">
-                  <option value="male" selected="selected">Madre/Padre</option>
-                  <option value="female">Terapeuta</option>
-                  <option value="male" selected="selected">Docente</option>
-                  <option value="female">Otro</option>
+                  <option value="familia" selected="selected">Familia</option>
+                  <option value="terapeuta">Terapeuta</option>
+                  <option value="docente" selected="selected">Docente</option>
+                  <option value="otre">Otro</option>
                 </select>
               </div>
             </div>
           </div>
         </li>
       </ul>
-  <a class="list-button" href="#" id="iniciasesionR">Iniciar sesión</a>
+  <a class="list-button" href="#" id="loginRegis">Registrarme</a>
+  <div><p><a class="link login-screen-close" href="/index/" id="volver" data-view=".page-content">Volver</a></p></div>
   </div>
+  
 </div>

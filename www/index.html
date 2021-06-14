@@ -24,9 +24,8 @@
     <!-- Color theme for statusbar -->
     <!-- <meta name="theme-color" content="#2196f3"> -->
     <meta name="color-scheme" content="light dark">
-
     <!-- Your app title -->
-    <title>My App</title>
+    <title>PictoAPP</title>
     <!-- Path to Framework7 Library CSS -->
     <link rel="stylesheet" href="lib/framework7/framework7-bundle.min.css">
     <!-- Path to icons -->
@@ -68,14 +67,6 @@
                                 class="icon material-icons">info</i></a></div>
                 </div>
             </div>
-            <!-- Toolbar 
-            <div class="toolbar toolbar-bottom">
-                <div class="toolbar-inner">
-                    <!-- Toolbar links 
-                    <a href="#" class="link">Link 1</a>
-                    <a href="#" class="link">Link 2</a>
-                </div>
-            </div> -->
             <!-- Initial Page, "data-name" contains page name -->
             <div data-name="index" class="page">
                 <!-- Scrollable page content -->
@@ -87,110 +78,29 @@
                         <p>Seleccioná una opción:</p>
                         </center>
                         <div>
-                            <a href="#" class="button button-fill login-screen-open"
-                                data-login-screen=".login-screen" id="login">Iniciar sesión</a>
+                            <a href="/login-screen/" class="button button-fill login-screen-open"
+                                data-login-screen=".login-screen" id="inicio">Iniciar sesión</a>
                         </div>
                         <div>
-                            <a href="#" class="button button-fill" id="registro">Registrarse</a>
+                            <a href="/registro/" class="button button-fill" id="registro">Registrarse</a>
                         </div>
                         <div >
-                            <a href="#" class="button button-fill" id="agenda">Continuar sin registrarse</a>
-                        </div>
-
-
-                        <!-- Link to another page -->
-                        <a href="/about/" data-view=".page-content">About app</a>
-
-                        <!-- In data-popup attribute we specify CSS selector of popup we need to open -->
-                        <p><a href="#" data-popup=".my-popup" class="popup-open">Open Popup</a></p>
-
-                        <!-- And somewhere in DOM -->
-                        <div class="popup my-popup">
-                            <div class="view">
-                                <div class="page">
-                                    <div class="navbar">
-                                        <div class="navbar-bg"></div>
-                                        <div class="navbar-inner">
-                                            <div class="title">Popup</div>
-                                            <div class="right">
-                                                <!-- Link to close popup -->
-                                                <a class="link popup-close">Close</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="page-content">
-                                        ...
-                                    </div>
-                                </div>
-                            </div>
+                            <a href="/agenda1/" class="button button-fill" id="visito">Continuar sin registrarse</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="view tab tab-active" id="">
-            <div class="page">
-                <div class="page-content login-screen-content">
-                  <div class="login-screen-title">My App</div>
-                  <!-- Open in login screen that already in DOM-->
-                  <a href="#" class="button button-fill login-screen-open" data-login-screen=".login-screen"></a>
-                  <form>
-                    <div class="list">
-                      <ul>
-                        <li class="item-content item-input">
-                          <div class="item-inner">
-                            <div class="item-title item-label">Usuario</div>
-                            <div class="item-input-wrap">
-                              <input type="text" name="username" placeholder="Usuario o e-mail" />
-                            </div>
-                          </div>
-                        </li>
-                        <li class="item-content item-input">
-                          <div class="item-inner">
-                            <div class="item-title item-label">Contraseña</div>
-                            <div class="item-input-wrap">
-                              <input type="password" name="password" placeholder="Contraseña" />
-                            </div>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="list">
-                      <ul>
-                        <li><a class="list-button" href="#">Iniciar sesión</a></li>
-                      </ul>
-                      <div class="block-footer">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <p><a class="link login-screen-close" href="#">Volver</a></p>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
-        </div>
     </div>
 
-    <!--<script>
-        export default (props, { $, $f7, $f7ready }) => {
-            $f7ready(() => {
-                // Dom Events
-                $('.panel-left').on('panel:open', function () {
-                    console.log('Panel left: open');
-                });
-                $('.panel-left').on('panel:opened', function () {
-                    console.log('Panel left: opened');
-                });
-            })
-
-            return $render;
-        }
-    </script>-->
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="lib/framework7/framework7-bundle.min.js"></script>
     <script type="text/javascript" src="js/my-app.js"></script>
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-firestore.js"></script>
     <script>
         // Your web app's Firebase configuration
         var firebaseConfig = {
