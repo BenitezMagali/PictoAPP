@@ -94,47 +94,65 @@ $$(document).on('page:init', '.page[data-name="login-screen"]', function (e) {
 $$(document).on('page:init', '.page[data-name="registro"]', function (e) {
   console.log("voy a intentar registrar al usuario")
   app.navbar.hide('.navbar', true, false)
-  var email = "usuario@dominio.com";
-  var clave = "1234Abc";
-  firebase.auth().createUserWithEmailAndPassword(email, clave)
-    .then((userCredential) => {
-      // Signed in
-      console.log("tu vieja se registró")
-      var user = userCredential.user;
-      var email = $$("#email")
-      // ...
 
-    })
-    .catch(function (error) { //este error es un json
-      console.error(error.code);
-      if (error.code == "auth/email-already-in-use") {
-        console.error("El mail ya existe");
+
+  $$("#loginRegis").on('click', function () {
+    var email = $$("#mail").val();
+    var contra = $$("#contra").val();
+    console.log(email)
+    console.log(contra)
+    firebase.auth().createUserWithEmailAndPassword(email, contra)
+      .then((userCredential) => {
+        // Signed in
+        console.log(userCredential)
+        //var usuario = userCredential.usuario;
+        var email = $$("#mail").val();
+        // ...
+        var db = firebase.firestore();
+        var colUsuarios = db.collection("usuarios");
+        var id_mail = $$("#mail").val()
+        var data = {
+          nombre: $$("#usuario").val(),
+          rol: $$("#rol").val(),
+        }
+        console.log("siguiente linea va a intentar hacer el set")
+        colUsuarios.doc(id_mail).set(data)
+          .then(() =>  {
+            console.log("ok, se creó con el ID:")
+            mainView.router.navigate('/agenda1/')
+          })
+          .catch(function (datodelerror) {
+            console.log("Error" + 
+            
+            
+            
+            datodelerror)
+          })
+      })
+      .catch(function (error) { //este error es un json HACER UN ALERT 
+        console.error(error.code);
+        if (error.code == "auth/email-already-in-use") {
+          console.error("El mail ya existe");
+        }
+        console.error(error.message)
+      })
+      
+
+        if (contra == $$("#repcontra").val()) {
+      console.log("hace click")
+      //$$("#loginRegis").on('click', function(){
+
+      //})
+    } else {
+      if (contra != $$("#repcontra")) {
+        console.log("Contraseña incorrecta")
       }
-      console.error(error.message)
-    })
-  var db = firebase.firestore();
-  var data = {
-    nombre: "usuario1",
-    mail: "usuario1@mail.com",
-    rol: "usuario",
-  }
-  db.collection("personas").add(data)
-    .then(function (docRef) {
-      console.log("ok, se creó con el ID:" + docRef.id)
-    })
-    .catch(function (datodelerror) {
-      console.log("Error" + datodelerror)
-    })
-
+    }
+  })
 })
-$$(document).on('click', function () {
-  $$('#iniciarsesionR').on('click', '/index/')
-})
-
 
 // Option 2. Using live 'page:init' event handlers for each page
 $$(document).on('page:init', '.page[data-name="agenda1"]', function (e) {
   // Do something here when page with data-name="about" attribute loaded and initialized
   console.log(e);
-  alert('Hello');
 })
