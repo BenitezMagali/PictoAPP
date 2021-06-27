@@ -31,6 +31,10 @@ var app = new Framework7({
     {
       path: '/registro/',
       url: 'registro.html',
+    },
+    {
+      path: '/agenda1-registrado/',
+      url: 'agenda1-registrado.html',
     }
   ]
   // ... other parameters
@@ -117,16 +121,16 @@ $$(document).on('page:init', '.page[data-name="registro"]', function (e) {
         }
         console.log("siguiente linea va a intentar hacer el set")
         colUsuarios.doc(id_mail).set(data)
-          .then(() =>  {
+          .then(() => {
             console.log("ok, se creó con el ID:")
-            mainView.router.navigate('/agenda1/')
+            mainView.router.navigate('/agenda1-registrado/')
           })
           .catch(function (datodelerror) {
-            console.log("Error" + 
-            
-            
-            
-            datodelerror)
+            console.log("Error" +
+
+
+
+              datodelerror)
           })
       })
       .catch(function (error) { //este error es un json HACER UN ALERT 
@@ -136,9 +140,9 @@ $$(document).on('page:init', '.page[data-name="registro"]', function (e) {
         }
         console.error(error.message)
       })
-      
 
-        if (contra == $$("#repcontra").val()) {
+
+    if (contra == $$("#repcontra").val()) {
       console.log("hace click")
       //$$("#loginRegis").on('click', function(){
 
@@ -155,4 +159,46 @@ $$(document).on('page:init', '.page[data-name="registro"]', function (e) {
 $$(document).on('page:init', '.page[data-name="agenda1"]', function (e) {
   // Do something here when page with data-name="about" attribute loaded and initialized
   console.log(e);
+  var posArriba=0;
+  var posAbajo=1;
+  $$('.picactual').on('click', function cambiopic() {
+    console.log("habemus click")
+    if (posAbajo<=6) {
+      if (posArriba!=0){
+        //mover lo que había a a fila de arriba (posArriba)
+        var srcHecho= $$('.picactual').children('img').attr('src')
+        $$('#hecho'+posArriba).children('img').attr('src', srcHecho)
+        posArriba++;
+      }
+      //agarra el elemento de abajo y lo pone en "haciendo" (posAbajo)
+      var srcDeLaImagen = $$('#hacer' + posAbajo).children('img').attr('src')
+      $$('.picactual').children('img').attr('src', srcDeLaImagen)
+      if (posAbajo==6) {
+        $$('#picactual').attr('src', 'img/icons8-estrella-relleno.gif')
+      }
+      $$('#hacer' + posAbajo).children('img').attr('src', 'img/icons8-star-struck-48.png')
+      posAbajo++;
+      if(posArriba==0){
+        posArriba++;
+      }
+    }
+  })
+    //var pictos = [1, 2, 3, 4, 5]
+    //var nombrepic;
+    //for (var i = 1; i <= pictos.length; i++) {
+      //var srcDeLaImagen = $$('#hacer' + pictos[0]).children('img').attr('src')
+      //$$('img').val('src','img/'+nombrepic+'.png')
+      //console.log('el src de la imagen tiene como valor ' + srcDeLaImagen)
+      //$$('.picactual').children('img').attr('src', srcDeLaImagen)
+   // })
+  //})
+  /*$$('#hacer1').on('click', function() {
+    console.log("hay click")
+    var srcDeLaImagen = $$('#hacer1').children('img').attr('src')
+    console.log('el src de la imagen tiene como valor '+ srcDeLaImagen)
+    $$('#picactual').attr('src',srcDeLaImagen)
+    for (i=1;i>=pictos.lenght; i++){
+      
+    }*/
+
 })

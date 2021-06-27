@@ -94,10 +94,10 @@
 }
 img{
   width: auto; height: auto;
-  max-width: 200px;
-  max-height: 200px;
-  min-width: 50px;
-  min-height: 50px;
+  max-width: 90vw;
+  max-height: 45vh;
+  min-width: 15vw;
+  min-height: 7vh;
 }
 
 .button {
@@ -105,25 +105,51 @@ img{
 }
 .hacer1{
   background-color: aquamarine;
-  width: 65px;
-  height: 65px;
+  width: 18vw;
+  height: 9vh;
   display: flex;
   float: left;
+  border: black;
+  border-width: 5px;
+  margin-top: 1vh;
+  align-content: stretch;
 }
 .haciendo{
-  width: 68vw;
-  height: 68vh;
-
+  margin-top: 1vh;
+  display: flex;
+  width: 90vw;
+  height: 60vh;
+  background-color: rgba(255, 255, 155, 0.438);
+  flex-direction: column;
+  align-content: centerºº;
 }
 .hecho1{
   background-color: lightcoral;
-  width: 65px;
-  height: 65px;
+  width: 18vw;
+  height: 9vh;
   display: flex;
   float: initial;
   float: left;
   padding-top: 30px;
   margin-top: 30px;
+  margin-bottom: 1vh;
 }
-
-
+.picactual {
+  border: black;
+  border-width: 30%;
+  width: 60vw;
+  height: 30vh;
+  align-content: center;
+  padding-left: 30vw;
+  padding-top: 20vh;
+}
+.picactual {
+  flex-direction: column
+}
+.texto {
+  display: flex;
+  align-items: flex-end;
+}
+.play {
+  margin:3vh;
+}
