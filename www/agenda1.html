@@ -1,14 +1,40 @@
 <!-- We don't need a full layout in this file because this page will be parsed with Ajax.  -->
 <div class="page" data-name="agenda1">
-
-    <div class="navbar">
-        <div class="navbar-inner">
-            <div class="title">Agenda diaria</div>
+    <!--panel izquierdo= funcionalidades básicas sin inicio de sesión-->
+    <div class="panel panel-left panel-cover panel-resizable panel-init">
+        <div class="block">
+            <p>Left Panel content here</p>
+            <p><a class="panel-close" href="#">Close me</a></p>
+            <p><a class="">Open Right Panel</a></p>
         </div>
     </div>
+
+    <div class="navbar">
+        <div class="navbar-bg"></div>
+        <div class="navbar-inner sliding">
+            <div class="left">
+                <a class="button panel-open" href="#" data-panel=".panel-left">
+                    <i class="icon material-icons">menu</i>
+                </a>
+            </div>
+            <div class="title">Agenda diaria</div>
+            <div class="right"><a class="button panel-open" href="#" data-panel=".panel-right-1"><i
+                        class="icon material-icons">info</i></a></div>
+        </div>
+    </div>
+    <div class="toolbar toolbar-bottom fab-morph-target">
+        <div class="toolbar-inner">
+            <!-- Each Toolbar link will close FAB (morph back) on click -->
+            <a class="link" id="volver" href="/index/" data-view=".page-content">Volver al inicio</a>
+            <a class="link" id="registro" href="/registro/" data-view='.page-content'>Registrarse</a>
+        </div>
+    </div>
+    <div id="botonfinal" class="oculto color-deeppurple fab fab-center-bottom fab-morph" data-morph-to=".toolbar" ><a href="#">
+        <i class="icon f7-icons md-only">rocket</i><i class="icon material-icons md-only">close</i></a></div>
+<!--Inicio del contenido de la página-->
     <div class="page-content block block-strong">
-        <div class="hecho">
-            
+        <div class="hecho row no-gap">
+
             <div class="hecho1 card-header align-items-flex-end" id="hecho1"><img src="img/0.png"></div>
             <div class="hecho1 card-header align-items-flex-end" id="hecho2"><img src="img/0.png"></div>
             <div class="hecho1 card-header align-items-flex-end" id="hecho3"><img src="img/0.png"></div>
@@ -16,16 +42,21 @@
             <div class="hecho1 card-header align-items-flex-end" id="hecho5"><img src="img/0.png"></div>
 
         </div>
-        <div class="haciendo">
-            <div class="picactual" ><img id="picactual" class="play" src="img/icons8-play-64.png"></div>
-            <p class="texto">Texto del picto</p>
+        <div class="haciendo col">
+            <div class="picactual"><img id="picactual" src="img/icons8-play-64.png"></div>
+            <div class="texto">
+                <p id='texto-picto'>¡EMPECEMOS!</p>
+            </div>
         </div>
-        <div class="hacer">
-            <div id="hacer1" class="hacer1 card-header align-items-flex-end"><img src="img/levantar de la cama.png"></div>
-            <div id="hacer2" class="hacer1 card-header align-items-flex-end""><img src="img/baño.png"></div>
-            <div id="hacer3" class="hacer1 card-header align-items-flex-end""><img src="img/desayunar.png"></div>
-            <div id="hacer4" class="hacer1 card-header align-items-flex-end""><img src="img/videollamada.png"></div>
-            <div id="hacer5" class="hacer1 card-header align-items-flex-end"><img src="img/jugar con el tablet.png""></div>
+        <div class="hacer row no-gap">
+            <div id="hacer1" class="hacer1 card-header align-items-flex-end"><img src="img/levantar de la cama.png" alt="Levantarse de la cama">
+            </div>
+            <div id="hacer2" class="hacer1 card-header align-items-flex-end""><img src=" img/baño.png" alt="Ir al baño"></div>
+            <div id="hacer3" class="hacer1 card-header align-items-flex-end""><img src=" img/desayunar.png" alt="Desayunar"></div>
+            <div id="hacer4" class="hacer1 card-header align-items-flex-end""><img src=" img/videollamada.png" alt="Videollamada"></div>
+            <div id="hacer5" class="hacer1 card-header align-items-flex-end"><img src="img/jugar con el tablet.png" alt="Jugar"></div>
         </div>
+        
+         
     </div>
 </div>

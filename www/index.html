@@ -11,7 +11,7 @@
             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
-   <!-- <meta http-equiv="Content-Security-Policy"
+    <!-- <meta http-equiv="Content-Security-Policy"
         content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
 -->
     <!-- Required meta tags-->
@@ -36,15 +36,8 @@
 
 <body class="color-theme-teal">
     <div id="app">
-        <!--panel izquierdo= funcionalidades básicas sin inicio de sesión-->
-        <div class="panel panel-left panel-cover panel-resizable panel-init">
-            <div class="block">
-                <p>Left Panel content here</p>
-                <p><a class="panel-close" href="#">Close me</a></p>
-                <p><a class="">Open Right Panel</a></p>
-            </div>
-        </div>
-        <!--Panel izquierdo= acerca de la app y contacto/reportar un problema-->
+
+        <!--Panel derecho= acerca de la app y contacto/reportar un problema-->
         <div class="panel panel-right panel-right-1 panel-cover panel-resizable panel-init">
             <div class="block">
                 <p>Right Panel content here</p>
@@ -56,35 +49,35 @@
         <div class="statusbar"></div>
         <!-- Your main view, should have "view-main" class -->
         <div class="view view-main">
-            <!-- Top Navbar -->
-            <div class="navbar color-theme-">
-                <div class="navbar-bg"></div>
-                <div class="navbar-inner">
-                    <div class="left"><a class="button panel-open" href="#" data-panel=".panel-left"><i
-                                class="icon material-icons">menu</i></a></div>
-                    <div class="title">PictoAPP</div>
-                    <div class="right"><a class="button panel-open" href="#" data-panel=".panel-right-1"><i
-                                class="icon material-icons">info</i></a></div>
-                </div>
-            </div>
+
             <!-- Initial Page, "data-name" contains page name -->
             <div data-name="index" class="page">
+                <!-- Top Navbar -->
+                <div class="navbar color-theme-">
+                    <div class="navbar-bg"></div>
+                    <div class="navbar-inner">
+                        <div class="title">PictoAPP</div>
+                        <div class="right"><a class="button panel-open" href="#" data-panel=".panel-right-1"><i
+                                    class="icon material-icons">info</i></a></div>
+                    </div>
+                </div>
                 <!-- Scrollable page content -->
                 <div class="page-content">
                     <div class="block">
                         <center>
                             <h3>¡Bienvenidx a PictoAPP!</h3>
                             <div class="hola"><img src="img/hola.png" class="img.peq" alt="HOLA"></div>
-                        <p>Seleccioná una opción:</p>
+                            <p>Seleccioná una opción:</p>
                         </center>
                         <div>
                             <a href="/login-screen/" class="button button-fill login-screen-open"
                                 data-login-screen=".login-screen" id="inicio">Iniciar sesión</a>
                         </div>
                         <div>
-                            <a href="/registro/" data-view='.page-content' class="button button-fill" id="registro">Registrarse</a>
+                            <a href="/registro/" data-view='.page-content' class="button button-fill"
+                                id="registro">Registrarse</a>
                         </div>
-                        <div >
+                        <div>
                             <a href="/agenda1/" class="button button-fill" id="visito">Continuar sin registrarse</a>
                         </div>
                     </div>
@@ -92,7 +85,7 @@
             </div>
         </div>
     </div>
- <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-firestore.js"></script>
@@ -111,7 +104,7 @@
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="lib/framework7/framework7-bundle.min.js"></script>
     <script type="text/javascript" src="js/my-app.js"></script>
-   
+
 </body>
 
 </html>

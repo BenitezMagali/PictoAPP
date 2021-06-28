@@ -1,0 +1,73 @@
+<div class="page" data-name="agenda2">
+    <!--panel izquierdo= funcionalidades básicas sin inicio de sesión-->
+    <div class="panel panel-left panel-cover panel-resizable panel-init">
+        <div class="block">
+            <p>Agendas</p>
+            <p><a class="panel-close" href="/agenda1-registrado/">Agenda diaria</a></p>
+            <p><a class="panel-close" href="#">Crear agenda</a></p>
+            <p><a class="panel-close" href="#">Close me</a></p>
+            
+        </div>
+    </div>
+
+    <div class="navbar">
+        <div class="navbar-bg"></div>
+        <div class="navbar-inner sliding">
+            <div class="left">
+                <a class="button panel-open" href="#" data-panel=".panel-left">
+                    <i class="icon material-icons">menu</i>
+                </a>
+            </div>
+            <div class="title">Agenda diaria</div>
+            <div class="right"><a class="button panel-open" href="#" data-panel=".panel-right-1"><i
+                        class="icon material-icons">info</i></a></div>
+        </div>
+    </div>
+    <div class="toolbar toolbar-bottom fab-morph-target">
+        <div class="toolbar-inner">
+            <!-- Each Toolbar link will close FAB (morph back) on click -->
+            <a class="link" id="volver" href="/index/" data-view=".page-content">Volver al inicio</a>
+            <a class="link" id="crearnuevo" href="#" data-view='.page-content'>Crear nueva agenda</a>
+        </div>
+    </div>
+    <div id="botonfinal" class="oculto color-deeppurple fab fab-center-bottom fab-morph" data-morph-to=".toolbar" ><a href="#">
+        <i class="icon f7-icons md-only">rocket</i><i class="icon material-icons md-only">close</i></a></div>
+<!--Inicio del contenido de la página-->
+    <div class="page-content block block-strong">
+        <div class="hecho row no-gap">
+
+            <div class="hecho1 card-header align-items-flex-end" id="hecho1"><img src="img/0.png"></div>
+            <div class="hecho1 card-header align-items-flex-end" id="hecho2"><img src="img/0.png"></div>
+            <div class="hecho1 card-header align-items-flex-end" id="hecho3"><img src="img/0.png"></div>
+            <div class="hecho1 card-header align-items-flex-end" id="hecho4"><img src="img/0.png"></div>
+            <div class="hecho1 card-header align-items-flex-end" id="hecho5"><img src="img/0.png"></div>
+
+        </div>
+        <div class="haciendo col">
+            <div class="picactual"><img id="picactual" src="img/icons8-play-64.png"></div>
+            <div class="texto">
+                <p id='texto-picto'>¡EMPECEMOS!</p>
+            </div>
+        </div>
+        <div class="hacer row no-gap">
+            <div id="hacer1" class="hacer1 card-header align-items-center"><img src="img/icons8-add-24.png" alt="" class="link popover-open" href="#" data-popover=".popover-links"></div>
+            <div id="hacer2" class="hacer1 card-header align-items-center""><img src=" img/icons8-add-24.png" alt="" class="link popover-open" href="#" data-popover=".popover-links"></div>
+            <div id="hacer3" class="hacer1 card-header align-items-center""><img src=" img/icons8-add-24.png" alt="" class="link popover-open" href="#" data-popover=".popover-links"></div>
+            <div id="hacer4" class="hacer1 card-header align-items-center""><img src=" img/icons8-add-24.png" alt="" class="link popover-open" href="#" data-popover=".popover-links"></div>
+            <div id="hacer5" class="hacer1 card-header align-items-center"><img src="img/icons8-add-24.png" alt="" class="link popover-open" href="#" data-popover=".popover-links"></div>
+        </div>
+        <div class="popover popover-links">
+            <div class="popover-inner">
+              <div class="list">
+                <ul>
+                  <li><a class="list-button item-link" href="#">Importar desde galería</a></li>
+                  <li><a class="list-button item-link" href="#">Buscar en ARASAAC</a></li>
+                  <li><a class="list-button item-link" href="#">Buscar en #SoyVisual</a></li>
+                  <li><a class="list-button item-link" href="#">Tomar una fotografía</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>  
+         
+    </div>
+</div>

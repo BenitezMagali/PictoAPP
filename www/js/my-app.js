@@ -35,6 +35,10 @@ var app = new Framework7({
     {
       path: '/agenda1-registrado/',
       url: 'agenda1-registrado.html',
+    },
+    {
+      path: '/agenda2/',
+      url: 'agenda2.html',
     }
   ]
   // ... other parameters
@@ -48,7 +52,7 @@ $$(document).on('deviceready', function () {
 });
 // Option 1. Using one 'page:init' handler for all pages
 $$(document).on('page:init', function (e) {
-  app.navbar.show(".navbar", true)
+  //app.navbar.show(".navbar", true)
   // Do something here when page loaded and initialized
   console.log(e);
 
@@ -77,21 +81,24 @@ $$(document).on('page:init', '.page[data-name="login-screen"]', function (e) {
     console.log("click sí");
     mainView.router.navigate('/index/');
   })
-  firebase.auth().signInWithEmailAndPassword(email, password)
+ 
+  $$('#login').on('click', function () {
+    var email = $$("#usuario").val();
+    var contra = $$("#contra").val();
+    console.log(email)
+  firebase.auth().signInWithEmailAndPassword(email, contra)
     .then((userCredential) => {
       // Signed in
       var user = userCredential.user;
       // ...
-      $$("#iniciasesion").on('click', function () {
-        mainView.router.navigate('/agenda/')
+      mainView.router.navigate('/agenda1-registrado/')
         console.log("tu vieja se logueó")
-      })
     })
     .catch((error) => {
       var errorCode = error.code;
       var errorMessage = error.message;
     })
-
+  })
 })
 
 //Página de registro
@@ -159,6 +166,7 @@ $$(document).on('page:init', '.page[data-name="registro"]', function (e) {
 $$(document).on('page:init', '.page[data-name="agenda1"]', function (e) {
   // Do something here when page with data-name="about" attribute loaded and initialized
   console.log(e);
+  
   var posArriba=0;
   var posAbajo=1;
   $$('.picactual').on('click', function cambiopic() {
@@ -172,9 +180,14 @@ $$(document).on('page:init', '.page[data-name="agenda1"]', function (e) {
       }
       //agarra el elemento de abajo y lo pone en "haciendo" (posAbajo)
       var srcDeLaImagen = $$('#hacer' + posAbajo).children('img').attr('src')
+      var textoDeLaImagen = $$('#hacer' + posAbajo).children('img').attr('alt')
       $$('.picactual').children('img').attr('src', srcDeLaImagen)
+      $$('#texto-picto').text(textoDeLaImagen);
+
       if (posAbajo==6) {
         $$('#picactual').attr('src', 'img/icons8-estrella-relleno.gif')
+      $$('#botonfinal').removeClass('oculto').addClass('visible')
+      $$('#texto-picto').text("¡Bien hecho!")
       }
       $$('#hacer' + posAbajo).children('img').attr('src', 'img/icons8-star-struck-48.png')
       posAbajo++;
