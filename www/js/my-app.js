@@ -39,6 +39,10 @@ var app = new Framework7({
     {
       path: '/agenda2/',
       url: 'agenda2.html',
+    },
+    {
+      path: '/buscador/',
+      url: 'buscador.html',
     }
   ]
   // ... other parameters
@@ -133,11 +137,7 @@ $$(document).on('page:init', '.page[data-name="registro"]', function (e) {
             mainView.router.navigate('/agenda1-registrado/')
           })
           .catch(function (datodelerror) {
-            console.log("Error" +
-
-
-
-              datodelerror)
+            console.log("Error" + datodelerror)
           })
       })
       .catch(function (error) { //este error es un json HACER UN ALERT 
