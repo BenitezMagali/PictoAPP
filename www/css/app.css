@@ -164,3 +164,35 @@ img{
   border: teal;
   border-width: 1vh;
 }
+.cardmenu {
+  display: flex;
+  padding-left: 5vh;
+}
+.color-verde{
+  background-color: rgba(2, 95, 2, 0.493);
+}
+.color-azul {
+  background-color: rgba(74, 74, 255, 0.445);
+}
+.color-violeta {
+  background-color: rgba(85, 10, 155, 0.562);
+}
+.color-rojo {
+  background-color: rgba(250, 7, 7, 0.541);
+}
+
+.encontrado {
+  width: 25px;
+}
+.picname {
+  padding-left: 7vw;
+  font-size: 18px;
+}
+#buscar{
+  margin: auto;
+  width: fit-content;
+}
+.pq{
+  width: auto;
+  padding: 2vh;
+}

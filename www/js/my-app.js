@@ -43,13 +43,23 @@ var app = new Framework7({
     {
       path: '/buscador/',
       url: 'buscador.html',
+    },
+    {
+      path: '/paginicio/',
+      url: 'paginicio.html'
+    },
+    {
+      path: '/soyvisual/',
+      url: 'https://www.soyvisual.org/'
     }
   ]
-  // ... other parameters
 });
 
 var mainView = app.views.create('.view-main');
-
+var urlImagen;
+var picName;
+var posAbajo= [1,2,3,4,5];
+var hacer;
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function () {
   console.log("Device is ready!");
@@ -61,7 +71,7 @@ $$(document).on('page:init', function (e) {
   console.log(e);
 
 })
-//Página de inicio
+//------------------------Página de inicio---------------------------------------
 $$(document).on('page:init', '.page[data-name="index"]', function (e) {
 
   $$('#login').on('click', function () {
@@ -78,39 +88,37 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
   })
 
 })
-//Página de inicio de sesión 
+//----------------------Página de inicio de sesión ----------------------------
 $$(document).on('page:init', '.page[data-name="login-screen"]', function (e) {
   app.navbar.hide('.navbar', true, false)
   $$('#volver').on('click', function () {
     console.log("click sí");
     mainView.router.navigate('/index/');
   })
- 
+
   $$('#login').on('click', function () {
     var email = $$("#usuario").val();
     var contra = $$("#contra").val();
     console.log(email)
-  firebase.auth().signInWithEmailAndPassword(email, contra)
-    .then((userCredential) => {
-      // Signed in
-      var user = userCredential.user;
-      // ...
-      mainView.router.navigate('/agenda1-registrado/')
+    firebase.auth().signInWithEmailAndPassword(email, contra)
+      .then((userCredential) => {
+        // Signed in
+        var user = userCredential.user;
+        // ...
+        mainView.router.navigate('/paginicio/')
         console.log("tu vieja se logueó")
-    })
-    .catch((error) => {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-    })
+      })
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+      })
   })
 })
 
-//Página de registro
+//-----------------------Página de registro---------------------------------
 $$(document).on('page:init', '.page[data-name="registro"]', function (e) {
   console.log("voy a intentar registrar al usuario")
   app.navbar.hide('.navbar', true, false)
-
-
   $$("#loginRegis").on('click', function () {
     var email = $$("#mail").val();
     var contra = $$("#contra").val();
@@ -151,9 +159,6 @@ $$(document).on('page:init', '.page[data-name="registro"]', function (e) {
 
     if (contra == $$("#repcontra").val()) {
       console.log("hace click")
-      //$$("#loginRegis").on('click', function(){
-
-      //})
     } else {
       if (contra != $$("#repcontra")) {
         console.log("Contraseña incorrecta")
@@ -162,20 +167,19 @@ $$(document).on('page:init', '.page[data-name="registro"]', function (e) {
   })
 })
 
-// Option 2. Using live 'page:init' event handlers for each page
+// ----------Agenda pre-cargada para quienes ingresen sin loguearse-------
 $$(document).on('page:init', '.page[data-name="agenda1"]', function (e) {
-  // Do something here when page with data-name="about" attribute loaded and initialized
   console.log(e);
-  
-  var posArriba=0;
-  var posAbajo=1;
+
+  var posArriba = 0;
+  var posAbajo = 1;
   $$('.picactual').on('click', function cambiopic() {
     console.log("habemus click")
-    if (posAbajo<=6) {
-      if (posArriba!=0){
+    if (posAbajo <= 6) {
+      if (posArriba != 0) {
         //mover lo que había a a fila de arriba (posArriba)
-        var srcHecho= $$('.picactual').children('img').attr('src')
-        $$('#hecho'+posArriba).children('img').attr('src', srcHecho)
+        var srcHecho = $$('.picactual').children('img').attr('src')
+        $$('#hecho' + posArriba).children('img').attr('src', srcHecho)
         posArriba++;
       }
       //agarra el elemento de abajo y lo pone en "haciendo" (posAbajo)
@@ -184,34 +188,65 @@ $$(document).on('page:init', '.page[data-name="agenda1"]', function (e) {
       $$('.picactual').children('img').attr('src', srcDeLaImagen)
       $$('#texto-picto').text(textoDeLaImagen);
 
-      if (posAbajo==6) {
+      if (posAbajo == 6) {
         $$('#picactual').attr('src', 'img/icons8-estrella-relleno.gif')
-      $$('#botonfinal').removeClass('oculto').addClass('visible')
-      $$('#texto-picto').text("¡Bien hecho!")
+        $$('#botonfinal').removeClass('oculto').addClass('visible')
+        $$('#texto-picto').text("¡Bien hecho!")
       }
       $$('#hacer' + posAbajo).children('img').attr('src', 'img/icons8-star-struck-48.png')
       posAbajo++;
-      if(posArriba==0){
+      if (posArriba == 0) {
         posArriba++;
       }
     }
   })
-    //var pictos = [1, 2, 3, 4, 5]
-    //var nombrepic;
-    //for (var i = 1; i <= pictos.length; i++) {
-      //var srcDeLaImagen = $$('#hacer' + pictos[0]).children('img').attr('src')
-      //$$('img').val('src','img/'+nombrepic+'.png')
-      //console.log('el src de la imagen tiene como valor ' + srcDeLaImagen)
-      //$$('.picactual').children('img').attr('src', srcDeLaImagen)
-   // })
-  //})
-  /*$$('#hacer1').on('click', function() {
-    console.log("hay click")
-    var srcDeLaImagen = $$('#hacer1').children('img').attr('src')
-    console.log('el src de la imagen tiene como valor '+ srcDeLaImagen)
-    $$('#picactual').attr('src',srcDeLaImagen)
-    for (i=1;i>=pictos.lenght; i++){
-      
-    }*/
+})
+//------------Página del buscador de pictos en ARASAAC-----------------
+$$(document).on('page:init', '.page[data-name="buscador"]', function (e) {
+  console.log(e);
+  var searchbar = app.searchbar.create({
+    el: '.searchbar',
+  })
+  $$('#buscar').on('click', function () {
+    var buscando = $$('#buscador').val();
+    var url = "https://api.arasaac.org/api/pictograms/es/search/" + buscando;
+    app.request.json(url, function (encontrados) {
+      console.log(encontrados)
+      for (i = 0; i < encontrados.length; i++) {
+        id = encontrados[i]._id;
+        urlImagen = "https://static.arasaac.org/pictograms/" + id + "/" + id + "_500.png"
+        $$('#imagen' + (i + 1)).attr('src', urlImagen);
+        var picName = encontrados[i].keywords[0].keyword;
+        $$('#picName' + (i + 1)).text(picName)
+        $$('#encontrado' + (i + 1)).removeClass('oculto')
+        $$('.item-inner').on('click', function () {
+          mainView.router.navigate('/agenda2/');
+          $$('#hacer1').children('img').attr('src', urlImagen).attr('alt', picName).removeClass('pq')
 
+        })
+      }
+    })
+  });
+  $$('#clear').on('click', function () {
+    $$('.item-title').addClass('oculto')
+  })
+  $$('#buscador').on('click', function () {
+    $$('.item-title').addClass('oculto')
+  })
+})
+
+
+//-------------------Agenda para personalizar-----------------------
+$$(document).on('page:init', '.page[data-name="agenda2"]', function (e) {
+  //----Buscar en SoyVisual----------------------------------------
+  $$('.open-confirm').on('click', function () {
+    app.dialog.confirm('Desgcargar material e importar desde galería?', 'Ir a #SoyVisual', function () {
+      mainView.router.navigate()
+    });
+  });
+  //----Buscar en ARASAAC ---------------------------------------
+  
+ var hacer= $$('#hacer'+posAbajo)
+
+  
 })
