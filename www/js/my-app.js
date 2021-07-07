@@ -39,6 +39,7 @@ var app = new Framework7({
     {
       path: '/agenda2/',
       url: 'agenda2.html',
+      keepAlive: true,
     },
     {
       path: '/buscador/',
@@ -56,10 +57,13 @@ var app = new Framework7({
 });
 
 var mainView = app.views.create('.view-main');
+//------------------------Variables globales------------------
 var urlImagen;
 var picName;
-var posAbajo= [1,2,3,4,5];
 var hacer;
+var clickEn;
+var foto;
+var texto;
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function () {
   console.log("Device is ready!");
@@ -71,7 +75,7 @@ $$(document).on('page:init', function (e) {
   console.log(e);
 
 })
-//------------------------Página de inicio---------------------------------------
+//------------------------Index---------------------------------------
 $$(document).on('page:init', '.page[data-name="index"]', function (e) {
 
   $$('#login').on('click', function () {
@@ -99,7 +103,7 @@ $$(document).on('page:init', '.page[data-name="login-screen"]', function (e) {
   $$('#login').on('click', function () {
     var email = $$("#usuario").val();
     var contra = $$("#contra").val();
-    console.log(email)
+
     firebase.auth().signInWithEmailAndPassword(email, contra)
       .then((userCredential) => {
         // Signed in
@@ -112,6 +116,15 @@ $$(document).on('page:init', '.page[data-name="login-screen"]', function (e) {
         var errorCode = error.code;
         var errorMessage = error.message;
       })
+    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+      .then(() => {
+
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+      });
   })
 })
 
@@ -199,8 +212,66 @@ $$(document).on('page:init', '.page[data-name="agenda1"]', function (e) {
         posArriba++;
       }
     }
+    /*$$('#escuchar').on('click', function () {
+
+        // basic usage
+        TTS.speak('p', function () {
+          alert('success');
+        }, function (reason) {
+          alert(reason);
+        });
+    })*/
   })
 })
+//----------------------Menú de inicio para registrados-------------------------
+$$(document).on('page:init', '.page[data-name="paginicio"]', function (e) {
+  $$('#signout').on('click', function () {
+    firebase.auth().signOut()
+      .then(() => {
+        // Sign-out successful.
+      })
+      .catch((error) => {
+        // An error happened.
+      });
+  })
+})
+//-------------------Agenda para personalizar-----------------------
+$$(document).on('page:init', '.page[data-name="agenda2"]', function (e) {
+  //----Buscar en SoyVisual----------------------------------------
+  $$('.open-confirm').on('click', function () {
+    app.dialog.confirm('Desgcargar material e importar desde galería?', 'Ir a #SoyVisual', function () {
+      mainView.router.navigate()
+    });
+  });
+
+  //----Buscar en ARASAAC ---------------------------------------
+  $$('#hacer1').on('click', function () {
+    clickEn = 1;
+    console.log('hice click en 3')
+  })
+
+  $$('#hacer3').on('click', function () {
+    clickEn = 2;
+    console.log('hice click en 3')
+  })
+
+  $$('#hacer3').on('click', function () {
+    clickEn = 3;
+    console.log('hice click en 3')
+  })
+  $$('#hacer4').on('click', function () {
+    clickEn = 4;
+    console.log('hice click en 4')
+  })
+  $$('#hacer5').on('click', function () {
+    clickEn = 5;
+    console.log('hice click en 5')
+  })
+
+
+
+})
+
 //------------Página del buscador de pictos en ARASAAC-----------------
 $$(document).on('page:init', '.page[data-name="buscador"]', function (e) {
   console.log(e);
@@ -219,13 +290,21 @@ $$(document).on('page:init', '.page[data-name="buscador"]', function (e) {
         var picName = encontrados[i].keywords[0].keyword;
         $$('#picName' + (i + 1)).text(picName)
         $$('#encontrado' + (i + 1)).removeClass('oculto')
-        $$('.item-inner').on('click', function () {
+        $$('#encontrado' + i).on('click', function () {
+          console.log("frena aca")
+          foto = this.children[0].src
+          //guardar el texto
+          texto = this.children[1].innerHTML
+          //mover a la agenda2
+          $$('#hacer' + clickEn).children('img').attr('src', foto).attr('alt', texto).removeClass('pq')
           mainView.router.navigate('/agenda2/');
-          $$('#hacer1').children('img').attr('src', urlImagen).attr('alt', picName).removeClass('pq')
+          //ponerle la foto a la posicion clickEn
+          //ponerle el texto en el alt al clickEn
+        })//guardar la foto
 
-        })
       }
-    })
+    }
+    )
   });
   $$('#clear').on('click', function () {
     $$('.item-title').addClass('oculto')
@@ -233,20 +312,4 @@ $$(document).on('page:init', '.page[data-name="buscador"]', function (e) {
   $$('#buscador').on('click', function () {
     $$('.item-title').addClass('oculto')
   })
-})
-
-
-//-------------------Agenda para personalizar-----------------------
-$$(document).on('page:init', '.page[data-name="agenda2"]', function (e) {
-  //----Buscar en SoyVisual----------------------------------------
-  $$('.open-confirm').on('click', function () {
-    app.dialog.confirm('Desgcargar material e importar desde galería?', 'Ir a #SoyVisual', function () {
-      mainView.router.navigate()
-    });
-  });
-  //----Buscar en ARASAAC ---------------------------------------
-  
- var hacer= $$('#hacer'+posAbajo)
-
-  
 })
