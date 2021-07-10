@@ -27,6 +27,7 @@ var app = new Framework7({
     {
       path: '/login-screen/',
       url: 'login-screen.html',
+
     },
     {
       path: '/registro/',
@@ -47,11 +48,8 @@ var app = new Framework7({
     },
     {
       path: '/paginicio/',
-      url: 'paginicio.html'
-    },
-    {
-      path: '/soyvisual/',
-      url: 'https://www.soyvisual.org/'
+      url: 'paginicio.html',
+      keepAlive: true,
     }
   ]
 });
@@ -60,10 +58,16 @@ var mainView = app.views.create('.view-main');
 //------------------------Variables globales------------------
 var urlImagen;
 var picName;
-var hacer;
+var hacer = [];
 var clickEn;
 var foto;
 var texto;
+var db;
+var colAgendas;
+var email;
+var nuevoNombre;
+var usuario;
+//------------------------------------------------------------
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function () {
   console.log("Device is ready!");
@@ -101,8 +105,9 @@ $$(document).on('page:init', '.page[data-name="login-screen"]', function (e) {
   })
 
   $$('#login').on('click', function () {
-    var email = $$("#usuario").val();
-    var contra = $$("#contra").val();
+    email = $$("#usuario").val();
+    contra = $$("#contra").val();
+    
 
     firebase.auth().signInWithEmailAndPassword(email, contra)
       .then((userCredential) => {
@@ -135,14 +140,12 @@ $$(document).on('page:init', '.page[data-name="registro"]', function (e) {
   $$("#loginRegis").on('click', function () {
     var email = $$("#mail").val();
     var contra = $$("#contra").val();
-    console.log(email)
-    console.log(contra)
     firebase.auth().createUserWithEmailAndPassword(email, contra)
       .then((userCredential) => {
         // Signed in
         console.log(userCredential)
         //var usuario = userCredential.usuario;
-        var email = $$("#mail").val();
+        email = $$("#mail").val();
         // ...
         var db = firebase.firestore();
         var colUsuarios = db.collection("usuarios");
@@ -151,7 +154,6 @@ $$(document).on('page:init', '.page[data-name="registro"]', function (e) {
           nombre: $$("#usuario").val(),
           rol: $$("#rol").val(),
         }
-        console.log("siguiente linea va a intentar hacer el set")
         colUsuarios.doc(id_mail).set(data)
           .then(() => {
             console.log("ok, se creó con el ID:")
@@ -168,8 +170,6 @@ $$(document).on('page:init', '.page[data-name="registro"]', function (e) {
         }
         console.error(error.message)
       })
-
-
     if (contra == $$("#repcontra").val()) {
       console.log("hace click")
     } else {
@@ -234,6 +234,29 @@ $$(document).on('page:init', '.page[data-name="paginicio"]', function (e) {
         // An error happened.
       });
   })
+  db = firebase.firestore();
+  colAgendas = db.collection("agendas");
+  colAgendas.where("usuario","==",email).get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        var colordeagenda = doc.data().color;
+        var nombredeagenda = doc.id;
+
+        var agendadelusuario = `
+    <div class="`+ colordeagenda + `"><p class="cardmenu">` + nombredeagenda + `</p>
+    <div class="card-content card-content-padding">
+        <a href="/agenda1-registrado/" class="link right"><i
+                class="icon material-icons cardmenu">play_circle_filled</i></a><a href="#" class="link left"><i
+                class="icon material-icons cardmenu">edit</i></a>
+    </div>
+    </div>`
+        $$('.page-content').append(agendadelusuario);
+
+      });
+    })
+    .catch(function () {
+      console.log(error.code)
+    })
 })
 //-------------------Agenda para personalizar-----------------------
 $$(document).on('page:init', '.page[data-name="agenda2"]', function (e) {
@@ -247,12 +270,12 @@ $$(document).on('page:init', '.page[data-name="agenda2"]', function (e) {
   //----Buscar en ARASAAC ---------------------------------------
   $$('#hacer1').on('click', function () {
     clickEn = 1;
-    console.log('hice click en 3')
+    console.log('hice click en 1')
   })
 
-  $$('#hacer3').on('click', function () {
+  $$('#hacer2').on('click', function () {
     clickEn = 2;
-    console.log('hice click en 3')
+    console.log('hice click en 2')
   })
 
   $$('#hacer3').on('click', function () {
@@ -267,8 +290,94 @@ $$(document).on('page:init', '.page[data-name="agenda2"]', function (e) {
     clickEn = 5;
     console.log('hice click en 5')
   })
+  //---------Opciones en guardar agenda----
+  $$('#nombreagenda').on('change', function () {
+    nuevoNombre = $$('#nombreagenda').val();
+    $$('#nuevonomb').text(nuevoNombre);
+  })
 
+  $$('.menu-dropdown-link').on('click', function () {
+    var color = this.id;
+    switch (color) {
+      case "verde":
+        $$('#preview').removeClass('color-azul', 'color-violeta', 'color-rojo', 'color-amarillo').addClass('color-verde')
+        break;
+      case "azul":
+        $$('#preview').removeClass('color-verde', 'color-violeta', 'color-rojo', 'color-amarillo').addClass('color-azul')
+        break;
+      case "violeta":
+        $$('#preview').removeClass('color-azul', 'color-verde', 'color-rojo', 'color-amarillo').addClass('color-violeta')
+        break;
+      case "rojo":
+        $$('#preview').removeClass('color-azul', 'color-violeta', 'color-verde', 'color-amarillo').addClass('color-rojo')
+        break;
+      case "amarillo":
+        $$('#preview').removeClass('color-azul', 'color-violeta', 'color-rojo', 'color-verde').addClass('color-amarillo')
+        break;
+      default:
+        break;
+    }
+  })
+  //-------Modificar el nombre de cada pictograma
+  $$('i.iconito').on('click',function(){
+    //var ejemplos= [1,2,3,4,5];
+    for (i=1;)
+    $$('#ejemplo'+ejemplos).remove('p').add('input')
+  })
+//-----guardar todo en la basededatos------
+  $$('#guardar').on('click', function () {
+    var agendaAGuardar = {
+      "pictogramas": [
+        {
+          foto: "",
+          texto: ""
+        },
+        {
+          foto: "",
+          texto: ""
+        },
+        {
+          foto: "",
+          texto: ""
+        },
+        {
+          foto: "",
+          texto: ""
+        },
+        {
+          foto: "",
+          texto: ""
+        }
+      ],
+      "color": "",
+      "usuario": email,
+    }
 
+    agendaAGuardar.pictogramas[0].foto = $$('#hacer1').children('img').attr('src');
+    agendaAGuardar.pictogramas[0].texto = $$('#hacer1').children('img').attr('alt');
+    agendaAGuardar.pictogramas[1].foto = $$('#hacer2').children('img').attr('src');
+    agendaAGuardar.pictogramas[1].texto = $$('#hacer2').children('img').attr('alt');
+    agendaAGuardar.pictogramas[2].foto = $$('#hacer3').children('img').attr('src');
+    agendaAGuardar.pictogramas[2].texto = $$('#hacer3').children('img').attr('src');
+    agendaAGuardar.pictogramas[3].foto = $$('#hacer4').children('img').attr('src');
+    agendaAGuardar.pictogramas[3].texto = $$('#hacer4').children('img').attr('alt');
+    agendaAGuardar.pictogramas[4].foto = $$('#hacer5').children('img').attr('src');
+    agendaAGuardar.pictogramas[4].texto = $$('#hacer5').children('img').attr('alt');
+    agendaAGuardar.color = $$('#preview').attr('class')
+
+    var db = firebase.firestore();
+    var colAgendas = db.collection("agendas");
+    var id_agenda = nuevoNombre;
+
+    colAgendas.doc(id_agenda).set(agendaAGuardar)
+      .then(() => {
+        console.log("ok, se creó con el ID:" + id_agenda)
+      })
+      .catch(() => {
+        console.log("no se creó nada")
+      }
+      )
+  })
 
 })
 
@@ -283,33 +392,65 @@ $$(document).on('page:init', '.page[data-name="buscador"]', function (e) {
     var url = "https://api.arasaac.org/api/pictograms/es/search/" + buscando;
     app.request.json(url, function (encontrados) {
       console.log(encontrados)
-      for (i = 0; i < encontrados.length; i++) {
+      for (i = 0; i <= encontrados.length; i++) {
         id = encontrados[i]._id;
         urlImagen = "https://static.arasaac.org/pictograms/" + id + "/" + id + "_500.png"
         $$('#imagen' + (i + 1)).attr('src', urlImagen);
         var picName = encontrados[i].keywords[0].keyword;
         $$('#picName' + (i + 1)).text(picName)
-        $$('#encontrado' + (i + 1)).removeClass('oculto')
-        $$('#encontrado' + i).on('click', function () {
-          console.log("frena aca")
-          foto = this.children[0].src
-          //guardar el texto
-          texto = this.children[1].innerHTML
-          //mover a la agenda2
-          $$('#hacer' + clickEn).children('img').attr('src', foto).attr('alt', texto).removeClass('pq')
-          mainView.router.navigate('/agenda2/');
-          //ponerle la foto a la posicion clickEn
-          //ponerle el texto en el alt al clickEn
-        })//guardar la foto
-
+        $$('#encontrado' + (i + 1)).removeClass('oculto').on('click', function () {
+          switch (clickEn) {
+            case 1:
+              foto = this.children[0].src
+              texto = this.children[1].innerHTML
+              $$('#hacer' + clickEn).children('img').attr('src', foto).attr('alt', texto).removeClass('pq')
+              $$('#ejemplo' + clickEn).children('img').attr('src', foto)
+              $$('#picejemplo'+clickEn).text(texto)
+              mainView.router.navigate('/agenda2/')
+              break;
+            case 2:
+              foto = this.children[0].src
+              texto = this.children[1].innerHTML
+              $$('#hacer' + clickEn).children('img').attr('src', foto).attr('alt', texto).removeClass('pq')
+              $$('#ejemplo' + clickEn).children('img').attr('src', foto)
+              $$('#picejemplo'+clickEn).text(texto)
+              mainView.router.navigate('/agenda2/')
+              break;
+            case 3:
+              foto = this.children[0].src
+              texto = this.children[1].innerHTML
+              $$('#hacer' + clickEn).children('img').attr('src', foto).attr('alt', texto).removeClass('pq')
+              $$('#ejemplo' + clickEn).children('img').attr('src', foto)
+              $$('#picejemplo'+clickEn).text(texto)
+              mainView.router.navigate('/agenda2/')
+              break;
+            case 4:
+              foto = this.children[0].src
+              texto = this.children[1].innerHTML
+              $$('#hacer' + clickEn).children('img').attr('src', foto).attr('alt', texto).removeClass('pq')
+              $$('#ejemplo' + clickEn).children('img').attr('src', foto)
+              $$('#picejemplo'+clickEn).text(texto)
+              mainView.router.navigate('/agenda2/')
+              break;
+            case 5:
+              foto = this.children[0].src
+              texto = this.children[1].innerHTML
+              $$('#hacer' + clickEn).children('img').attr('src', foto).attr('alt', texto).removeClass('pq')
+              $$('#ejemplo' + clickEn).children('img').attr('src', foto)
+              $$('#picejemplo'+clickEn).text(texto)
+              mainView.router.navigate('/agenda2/')
+              break;
+            default:
+              break;
+          }
+        })
       }
-    }
-    )
+    })
   });
   $$('#clear').on('click', function () {
-    $$('.item-title').addClass('oculto')
+    $$('.itemcito').addClass('oculto')
   })
   $$('#buscador').on('click', function () {
-    $$('.item-title').addClass('oculto')
+    $$('.itemcito').addClass('oculto')
   })
 })

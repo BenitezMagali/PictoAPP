@@ -18,15 +18,34 @@
                     <i class="icon material-icons">menu</i>
                 </a>
             </div>
-            <div class="title">Agenda diaria</div>
+            <div class="title">Crear agenda</div>
             <div class="right"><a class="button panel-open" href="#" data-panel=".panel-right-1"><i
                         class="icon material-icons">info</i></a></div>
         </div>
     </div>
+    <!--Botón violeta con funciones: guardar - editar - play -->
+    <div class="fab fab-center-center color-deeppurple">
+        <a href="#">
+            <i class="icon f7-icons md-only">rocket</i>
+            <i class="icon f7-icons if-not-md">plus</i>
+            <i class="icon f7-icons if-not-md">xmark</i>
+            <i class="icon material-icons md-only">close</i>
+        </a>
+        <div class="fab-buttons fab-right-bottom fab-buttons-top">
+            <a class="fab-label-button popup-open" data-popup=".popup-services" href="#" id="save"><i
+                    class="icon material-icons md-only">save</i><span class="fab-label fab-close">Guardar
+                    Agenda</span></a>
+            <a class="fab-label-button popup-open" data-popup=".popup-services2" href="#"><i
+                    class="icon material-icons md-only">edit</i><span class="fab-label">Editar texto</span></a>
+            <a class="fab-label-button" href="#"><i class="icon material-icons md-only">play_arrow</i><span
+                    class="fab-label">Iniciar</span></a>
+        </div>
+    </div>
+    <!--Botón violeta del final: abre la toolbar con opciones -->
     <div class="toolbar toolbar-bottom fab-morph-target">
         <div class="toolbar-inner">
             <!-- Each Toolbar link will close FAB (morph back) on click -->
-            <a class="link" id="volver" href="/index/" data-view=".page-content">Volver al inicio</a>
+            <a class="link" id="volver" href="/paginicio/" data-view=".page-content">Volver al inicio</a>
             <a class="link" id="crearnuevo" href="#" data-view='.page-content'>Crear nueva agenda</a>
         </div>
     </div>
@@ -71,7 +90,8 @@
                 <div class="list">
                     <ul>
                         <li><a class="list-button item-link" href="#">Importar desde galería</a></li>
-                        <li id="arasaac"><a class="list-button item-link popover-close" href="/buscador/">Buscar en ARASAAC</a></li>
+                        <li id="arasaac"><a class="list-button item-link popover-close" href="/buscador/">Buscar en
+                                ARASAAC</a></li>
                         <li><a class="list-button item-link popover-close open-confirm" href="#">Buscar en
                                 #SoyVisual</a></li>
                         <li><a class="list-button item-link" href="#">Tomar una fotografía</a></li>
@@ -79,12 +99,101 @@
                 </div>
             </div>
         </div>
-       <!-- <div class="dialog-inner oculto">
-            <div class="dialog-title">Ir a SoyVisual.org</div>
-            <div class="dialog-text">Descargar material para importar desde</div>
-            <div class="dialog-buttons"><span class="dialog-button">Cancelar</span><span
-                class="dialog-button dialog-button-bold"><a href="https://www.soyvisual.org/">Ir a #SoyVisual</a></span>
+        <!--Popup para guardar los detalles de la agenda creada-->
+        <div class="popup popup-services">
+            <div class="block">
+                <p>Guardar agenda</p>
+                <p><a class="link popup-close" href="#">Cerrar</a></p>
+                <div class="list">
+                    <ul>
+                        <li class="item-content item-input">
+                            <div class="item-inner">
+                                <div class="item-title item-label">Nombre</div>
+                                <div class="item-input-wrap">
+                                    <input type="text" name="nuevaagenda" id="nombreagenda"
+                                        placeholder="Nombre de la agenda" value="" />
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="row">
+                        <div class="block-title col-66">Seleccione el color de la agenda</div>
+                    <div class="menu col-33">
+                        <div class="menu-inner">
+                            <div class="menu-item menu-item-dropdown teal">
+                                <div class="menu-item-content teal" id="seleccolor">Color</div>
+                                <div class="menu-dropdown menu-dropdown-left teal">
+                                    <div class="menu-dropdown-content teal">
+                                        <a href="#" class="menu-dropdown-link menu-close teal" id="verde">Verde</a>
+                                        <a href="#" class="menu-dropdown-link menu-close teal" id="azul">Azul</a>
+                                        <a href="#" class="menu-dropdown-link menu-close teal" id="violeta">Violeta</a>
+                                        <a href="#" class="menu-dropdown-link menu-close teal" id="rojo">Rojo</a>
+                                        <a href="#" class="menu-dropdown-link menu-close teal" id="amarillo">Amarillo</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </br>
+                <p>Vista previa: </p>
+                <div class="card card-header align-items-center cardmenu" id="preview">
+                    <p class="cardmenu" id="nuevonomb"></p>
+                    <div class="card-content card-content-padding">
+                        <a href="#" class="link right"><i
+                                class="icon material-icons cardmenu">play_circle_filled</i></a><a href="#"
+                            class="link left"><i class="icon material-icons cardmenu">edit</i></a>
+                    </div>
+                </div>
+                <ul>
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title row" id="ejemplo1"><img src="" class="encontrado ">
+                                <p id="picejemplo1" class="picname col-33"></p><i
+                                    class="icon material-icons md-only cardmenu col-33 iconito">edit</i>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title row" id="ejemplo2"><img src="" class="encontrado">
+                                <p id="picejemplo2" class="picname col-33"></p><i
+                                    class="icon material-icons md-only cardmenu col-33 button iconito">edit</i>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title row" id="ejemplo3"><img src="" class="encontrado">
+                                <p id="picejemplo3" class="picname col-33"></p><i
+                                    class="icon material-icons md-only cardmenu col-33 button iconito">edit</i>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title row" id="ejemplo4"><img src="" class="encontrado">
+                                <p id="picejemplo4" class="picname col-33"></p><i
+                                    class="icon material-icons md-only cardmenu col-33 button iconito">edit</i>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title row" id="ejemplo5"><img src="" class="encontrado">
+                                <p id="picejemplo5" class="picname col-33"></p><i
+                                    class="icon material-icons md-only cardmenu col-33 button iconito">edit</i>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                </br>
+                <ul>
+                    <li><a class="list-button popup-close" href="#" id="guardar" data-view=".page-content"><i
+                                class="icon material-icons md-only">save</i> Guardar</a></li>
+                </ul>
             </div>
-        </div>-->
+        </div>
     </div>
+</div>
 </div>

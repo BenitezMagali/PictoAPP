@@ -169,7 +169,7 @@ img{
   padding-left: 5vh;
 }
 .color-verde{
-  background-color: rgba(2, 95, 2, 0.493);
+  background-color: rgba(42, 226, 42, 0.493);
 }
 .color-azul {
   background-color: rgba(74, 74, 255, 0.445);
@@ -180,12 +180,17 @@ img{
 .color-rojo {
   background-color: rgba(250, 7, 7, 0.541);
 }
+.color-amarillo {
+  background-color: rgba(250, 246, 7, 0.541);
+}
 
 .encontrado {
   width: 25px;
+  display: flex;
 }
 .picname {
   padding-left: 7vw;
+  padding-right: 7vw;
   font-size: 18px;
 }
 #buscar{
@@ -195,4 +200,18 @@ img{
 .pq{
   width: auto;
   padding: 2vh;
+}
+.teal{
+  background-color: teal !important;
+}
+.popup-services {
+  background-color: rgb(221, 255, 250);
+}
+.iconito{
+  padding-top: 3vh;
+  display: flex;
+}
+.menu{
+  display: flex;
+  float: right;
 }
