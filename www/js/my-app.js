@@ -51,11 +51,11 @@ var app = new Framework7({
       url: 'paginicio.html',
       keepAlive: true,
     },
-{
-  path: '/guardar/',
-  url: 'guardar.html',
-  keepAlive: true,
-}
+    {
+      path: '/guardar/',
+      url: 'guardar.html',
+      keepAlive: true,
+    }
   ]
 });
 
@@ -75,6 +75,7 @@ var usuario;
 var newname;
 var nombredeagenda;
 var id_agenda;
+var pictosrecatados;
 //------------------------------------------------------------
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function () {
@@ -281,146 +282,201 @@ $$(document).on('page:init', '.page[data-name="paginicio"]', function (e) {
         $$('.page-content').append(agendadelusuario);
         $$('.accordion-item-content').children('.list').append(agendaenmenu);
       });
-    })
-    .catch(function () {
-      console.log(error.code)
-    })
-})
-//-------------------Agenda para personalizar-----------------------
-$$(document).on('page:init', '.page[data-name="agenda2"]', function (e) {
-  //----Buscar en SoyVisual----------------------------------------
-  $$('.open-confirm').on('click', function () {
-    app.dialog.confirm('Desgcargar material e importar desde galería?', 'Ir a #SoyVisual', function () {
-      mainView.router.navigate()
-    });
-  });
-
-  //----Buscar en ARASAAC ---------------------------------------
-  $$('#hacer1').on('click', function () {
-    clickEn = 1;
-    console.log('hice click en 1')
-  })
-
-  $$('#hacer2').on('click', function () {
-    clickEn = 2;
-    console.log('hice click en 2')
-  })
-
-  $$('#hacer3').on('click', function () {
-    clickEn = 3;
-    console.log('hice click en 3')
-  })
-  $$('#hacer4').on('click', function () {
-    clickEn = 4;
-    console.log('hice click en 4')
-  })
-  $$('#hacer5').on('click', function () {
-    clickEn = 5;
-    console.log('hice click en 5')
-  })
-  //---------Opciones en guardar agenda----
-  $$('#nombreagenda').on('change', function () {
-    nuevoNombre = $$('#nombreagenda').val();
-    $$('#nuevonomb').text(nuevoNombre);
-  })
-
-  $$('.menu-dropdown-link').on('click', function () {
-    var color = this.id;
-    switch (color) {
-      case "verde":
-        $$('#preview').removeClass('color-azul', 'color-violeta', 'color-rojo', 'color-amarillo').addClass('color-verde')
-        $$('#seleccolor').text(color)
-        break;
-      case "azul":
-        $$('#preview').removeClass('color-verde', 'color-violeta', 'color-rojo', 'color-amarillo').addClass('color-azul')
-        $$('#seleccolor').text(color)
-        break;
-      case "violeta":
-        $$('#preview').removeClass('color-azul', 'color-verde', 'color-rojo', 'color-amarillo').addClass('color-violeta')
-        $$('#seleccolor').text(color)
-        break;
-      case "rojo":
-        $$('#preview').removeClass('color-azul', 'color-violeta', 'color-verde', 'color-amarillo').addClass('color-rojo')
-        $$('#seleccolor').text(color)
-        break;
-      case "amarillo":
-        $$('#preview').removeClass('color-azul', 'color-violeta', 'color-rojo', 'color-verde').addClass('color-amarillo')
-        $$('#seleccolor').text(color)
-        break;
-      default:
-        break;
-    }
-  })
-  //-------Modificar el nombre de cada pictograma
-  $$('#editarnombrecito').on('click', function () {
-
-    $$('#picejemplo1').addClass('oculto2')
-    $$('#nuevonombrecito').removeClass('oculto2')
-    $$('#editarnombrecito').addClass('oculto2')
-    $$('#guardarnuevonombre').removeClass('oculto2').on('click', function () {
-      newname = $$('#nuevonombrecito').val()
-      $$('#hacer1').children('img').attr('alt', newname);
-      $$('#editarnombrecito').removeClass('oculto2')
-    })
-  })
-
-  //-----guardar todo en la basededatos------
-  $$('#guardar').on('click', function () {
-    var agendaAGuardar = {
-      "pictogramas": [
-        {
-          foto: "",
-          texto: ""
-        },
-        {
-          foto: "",
-          texto: ""
-        },
-        {
-          foto: "",
-          texto: ""
-        },
-        {
-          foto: "",
-          texto: ""
-        },
-        {
-          foto: "",
-          texto: ""
-        }
-      ],
-      "color": "",
-      "usuario": email,
-      "nombre": id_agenda
-    }
-
-    agendaAGuardar.pictogramas[0].foto = $$('#hacer1').children('img').attr('src');
-    agendaAGuardar.pictogramas[0].texto = $$('#hacer1').children('img').attr('alt');
-    agendaAGuardar.pictogramas[1].foto = $$('#hacer2').children('img').attr('src');
-    agendaAGuardar.pictogramas[1].texto = $$('#hacer2').children('img').attr('alt');
-    agendaAGuardar.pictogramas[2].foto = $$('#hacer3').children('img').attr('src');
-    agendaAGuardar.pictogramas[2].texto = $$('#hacer3').children('img').attr('src');
-    agendaAGuardar.pictogramas[3].foto = $$('#hacer4').children('img').attr('src');
-    agendaAGuardar.pictogramas[3].texto = $$('#hacer4').children('img').attr('alt');
-    agendaAGuardar.pictogramas[4].foto = $$('#hacer5').children('img').attr('src');
-    agendaAGuardar.pictogramas[4].texto = $$('#hacer5').children('img').attr('alt');
-    agendaAGuardar.color = $$('#preview').attr('class')
-
-    var db = firebase.firestore();
-    var colAgendas = db.collection("agendas");
-    id_agenda = nuevoNombre;
-
-    colAgendas.doc(id_agenda).set(agendaAGuardar)
-      .then(() => {
-        console.log("ok, se creó con el ID:" + id_agenda)
+      $$('#playagenda1').on('click', function () {
+        var nombrecito = this.parentElement.parentElement.parentElement.children[0].innerText;
+        $$('#primeraetapa').addClass('oculto2')
+        console.log("entré")
+        colAgendas.where("nombre", "==", nombrecito).get()
+          .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+              $$('#tituloagenda').text(nombrecito)
+              pictosrecatados = doc.data().pictogramas;
+              for (i = 0; i < 5; i++) {
+                $$('hacer' + (i + 1)).children('img').attr('src', pictosrecatados[i])
+              }
+            })
+            mainView.router.navigate('/agenda2/');
+          })
       })
-      .catch(() => {
-        console.log("no se creó nada")
+        .catch(function (error) {
+          console.log(error.code)
+        })
+
+
+
+    })
+  //-------------------Agenda para personalizar-----------------------
+  $$(document).on('page:init', '.page[data-name="agenda2"]', function (e) {
+    //----Buscar en SoyVisual----------------------------------------
+    $$('.open-confirm').on('click', function () {
+      app.dialog.confirm('Desgcargar material e importar desde galería?', 'Ir a #SoyVisual', function () {
+        mainView.router.navigate()
+      });
+    });
+
+    //----Buscar en ARASAAC ---------------------------------------
+    $$('#hacer1').on('click', function () {
+      clickEn = 1;
+      console.log('hice click en 1')
+    })
+
+    $$('#hacer2').on('click', function () {
+      clickEn = 2;
+      console.log('hice click en 2')
+    })
+
+    $$('#hacer3').on('click', function () {
+      clickEn = 3;
+      console.log('hice click en 3')
+    })
+    $$('#hacer4').on('click', function () {
+      clickEn = 4;
+      console.log('hice click en 4')
+    })
+    $$('#hacer5').on('click', function () {
+      clickEn = 5;
+      console.log('hice click en 5')
+    })
+    //---------Opciones en guardar agenda----
+    $$('#nombreagenda').on('change', function () {
+      nuevoNombre = $$('#nombreagenda').val();
+      $$('#nuevonomb').text(nuevoNombre);
+    })
+
+    $$('.menu-dropdown-link').on('click', function () {
+      var color = this.id;
+      switch (color) {
+        case "verde":
+          $$('#preview').removeClass('color-azul', 'color-violeta', 'color-rojo', 'color-amarillo').addClass('color-verde')
+          $$('#seleccolor').text(color)
+          break;
+        case "azul":
+          $$('#preview').removeClass('color-verde', 'color-violeta', 'color-rojo', 'color-amarillo').addClass('color-azul')
+          $$('#seleccolor').text(color)
+          break;
+        case "violeta":
+          $$('#preview').removeClass('color-azul', 'color-verde', 'color-rojo', 'color-amarillo').addClass('color-violeta')
+          $$('#seleccolor').text(color)
+          break;
+        case "rojo":
+          $$('#preview').removeClass('color-azul', 'color-violeta', 'color-verde', 'color-amarillo').addClass('color-rojo')
+          $$('#seleccolor').text(color)
+          break;
+        case "amarillo":
+          $$('#preview').removeClass('color-azul', 'color-violeta', 'color-rojo', 'color-verde').addClass('color-amarillo')
+          $$('#seleccolor').text(color)
+          break;
+        default:
+          break;
       }
-      )
-  })
-  $$('#playagenda').on('click', function () {
-    $$('#primeraetapa').addClass('oculto')
+    })
+    //-------Modificar el nombre de cada pictograma
+    $$('#editarnombrecito').on('click', function () {
+
+      $$('#picejemplo1').addClass('oculto2')
+      $$('#nuevonombrecito').removeClass('oculto2')
+      $$('#editarnombrecito').addClass('oculto2')
+      $$('#guardarnuevonombre').removeClass('oculto2').on('click', function () {
+        newname = $$('#nuevonombrecito').val()
+        $$('#hacer1').children('img').attr('alt', newname);
+        $$('#editarnombrecito').removeClass('oculto2')
+      })
+    })
+
+    //-----guardar todo en la base de datos------
+    $$('#guardar').on('click', function () {
+      var agendaAGuardar = {
+        "pictogramas": [
+          {
+            foto: "",
+            texto: ""
+          },
+          {
+            foto: "",
+            texto: ""
+          },
+          {
+            foto: "",
+            texto: ""
+          },
+          {
+            foto: "",
+            texto: ""
+          },
+          {
+            foto: "",
+            texto: ""
+          }
+        ],
+        "color": "",
+        "usuario": email,
+        "nombre": nuevoNombre,
+      }
+
+      agendaAGuardar.pictogramas[0].foto = $$('#hacer1').children('img').attr('src');
+      agendaAGuardar.pictogramas[0].texto = $$('#hacer1').children('img').attr('alt');
+      agendaAGuardar.pictogramas[1].foto = $$('#hacer2').children('img').attr('src');
+      agendaAGuardar.pictogramas[1].texto = $$('#hacer2').children('img').attr('alt');
+      agendaAGuardar.pictogramas[2].foto = $$('#hacer3').children('img').attr('src');
+      agendaAGuardar.pictogramas[2].texto = $$('#hacer3').children('img').attr('src');
+      agendaAGuardar.pictogramas[3].foto = $$('#hacer4').children('img').attr('src');
+      agendaAGuardar.pictogramas[3].texto = $$('#hacer4').children('img').attr('alt');
+      agendaAGuardar.pictogramas[4].foto = $$('#hacer5').children('img').attr('src');
+      agendaAGuardar.pictogramas[4].texto = $$('#hacer5').children('img').attr('alt');
+      agendaAGuardar.color = $$('#preview').attr('class')
+
+      var db = firebase.firestore();
+      var colAgendas = db.collection("agendas");
+      id_agenda = nuevoNombre;
+
+      colAgendas.doc(id_agenda).set(agendaAGuardar)
+        .then(() => {
+          console.log("ok, se creó con el ID:" + id_agenda)
+        })
+        .catch(() => {
+          console.log("no se creó nada")
+        }
+        )
+    })
+    $$('#playagenda').on('click', function () {
+      $$('#primeraetapa').addClass('oculto')
+      var plus = $$('#hacer' + clickEn).children('img').attr('img', 'img/icons8-add-24.png')
+      if (plus == true) {
+        $$('#hacer' + clickEn).children('img').attr('img', 'img/0.png')
+      }
+
+      var posArriba = 0;
+      var posAbajo = 1;
+      $$('.picactual').on('click', function cambiopic() {
+        console.log("habemus click")
+        if (posAbajo <= 6) {
+          if (posArriba != 0) {
+            //mover lo que había a a fila de arriba (posArriba)
+            var srcHecho = $$('.picactual').children('img').attr('src')
+            $$('#hecho' + posArriba).children('img').attr('src', srcHecho)
+            posArriba++;
+          }
+          //agarra el elemento de abajo y lo pone en "haciendo" (posAbajo)
+          var srcDeLaImagen = $$('#hacer' + posAbajo).children('img').attr('src')
+          var textoDeLaImagen = $$('#hacer' + posAbajo).children('img').attr('alt')
+          $$('.picactual').children('img').attr('src', srcDeLaImagen)
+          $$('#texto-picto').text(textoDeLaImagen);
+
+          if (posAbajo == 6) {
+            $$('#picactual').attr('src', 'img/icons8-estrella-relleno.gif')
+            $$('#botonfinal').removeClass('oculto').addClass('visible')
+            $$('#texto-picto').text("¡Bien hecho!")
+          }
+          $$('#hacer' + posAbajo).children('img').attr('src', 'img/icons8-star-struck-48.png')
+          posAbajo++;
+          if (posArriba == 0) {
+            posArriba++;
+          }
+        }
+      })
+    })
+    //--------Traer de la BD la agenda guardada-------------
+
     var posArriba = 0;
     var posAbajo = 1;
     $$('.picactual').on('click', function cambiopic() {
@@ -451,52 +507,8 @@ $$(document).on('page:init', '.page[data-name="agenda2"]', function (e) {
       }
     })
   })
-  $$('#playagenda1').on('click', function () {
-    $$('#primeraetapa').addClass('oculto2')
-    console.log("entré")
-    colAgendas.where("usuario", "==", id_agenda).get()
-  .then((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-      $$('#tituloagenda').text(nombredeagenda)
-var pictosrecatados= doc.data().pictogramas;
+  $$('#volver1').on('click', function () {
 
-      for (i=0; i<5; i++){
-        $$('hacer'+(i+1).children('img').attr('src',pictosrecatados))
-      }
-    }) 
-    mainView.router.navigate('/agenda2/');
-  })
-
-
-    var posArriba = 0;
-    var posAbajo = 1;
-    $$('.picactual').on('click', function cambiopic() {
-      console.log("habemus click")
-      if (posAbajo <= 6) {
-        if (posArriba != 0) {
-          //mover lo que había a a fila de arriba (posArriba)
-          var srcHecho = $$('.picactual').children('img').attr('src')
-          $$('#hecho' + posArriba).children('img').attr('src', srcHecho)
-          posArriba++;
-        }
-        //agarra el elemento de abajo y lo pone en "haciendo" (posAbajo)
-        var srcDeLaImagen = $$('#hacer' + posAbajo).children('img').attr('src')
-        var textoDeLaImagen = $$('#hacer' + posAbajo).children('img').attr('alt')
-        $$('.picactual').children('img').attr('src', srcDeLaImagen)
-        $$('#texto-picto').text(textoDeLaImagen);
-
-        if (posAbajo == 6) {
-          $$('#picactual').attr('src', 'img/icons8-estrella-relleno.gif')
-          $$('#botonfinal').removeClass('oculto').addClass('visible')
-          $$('#texto-picto').text("¡Bien hecho!")
-        }
-        $$('#hacer' + posAbajo).children('img').attr('src', 'img/icons8-star-struck-48.png')
-        posAbajo++;
-        if (posArriba == 0) {
-          posArriba++;
-        }
-      }
-    })
   })
 })
 

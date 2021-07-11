@@ -234,3 +234,6 @@ img{
   display: flex;
   justify-content: space-between;
 }
+.menu50{
+  display: flexbox;
+}

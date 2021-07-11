@@ -34,7 +34,7 @@
     <div class="toolbar toolbar-bottom fab-morph-target">
         <div class="toolbar-inner">
             <!-- Each Toolbar link will close FAB (morph back) on click -->
-            <a class="link" id="volver" href="/paginicio/" data-view=".page-content">Volver al inicio</a>
+            <a class="link" id="volver1" href="/paginicio/" data-view=".page-content">Volver al inicio</a>
             <a class="link" id="crearnuevo" href="#" data-view='.page-content'>Crear nueva agenda</a>
         </div>
     </div>
@@ -91,13 +91,14 @@
         <!--Popup para guardar los detalles de la agenda creada-->
         <div class="popup popup-services fondito">
             <div class="block">
-                <p>Guardar agenda</p>
-                <p><a class="link popup-close" href="#">Cerrar</a></p>
+                <div class="row no-gap">
+                    <a class="list-button popup-close col-50" href="#" id="guardar" data-view=".page-content">Guardar</a>
+                    <p><a class="link popup-close col-50" href="#">Cerrar</a></p>
+                </div>
                 <div class="list">
                     <ul>
                         <li class="item-content item-input">
                             <div class="item-inner">
-                                <div class="item-title item-label">Nombre</div>
                                 <div class="item-input-wrap">
                                     <input type="text" name="nuevaagenda" id="nombreagenda"
                                         placeholder="Nombre de la agenda" value="" />
@@ -125,9 +126,8 @@
                             </li>
                         </ul>
                     </div>
-                    <p>Vista previa: </p>
                     <div class="card card-header align-items-center cardmenu" id="preview">
-                        <p class="cardmenu" id="nuevonomb"></p>
+                        <p class="cardmenu" id="nuevonomb">Vista previa</p>
                         <div class="card-content card-content-padding">
                             <a href="#" class="link right"><i
                                     class="icon material-icons cardmenu">play_circle_filled</i></a><a href="#"
@@ -140,75 +140,149 @@
                             <li class="accordion-item">
                                 <a href="" class="item-link item-content">
                                     <div class="item-inner">
-                                        <div class="item-title" id="seleccolor">
-                                            Seleccione un color
+                                        <div class="item-title" id="">
+                                            Modificar texto de pictograma
                                         </div>
                                     </div>
                                 </a>
                                 <div class="accordion-item-content">
-                                    <a href="#" class="menu-dropdown-link menu-close teal" id="verde">Verde</a>
-                                    <a href="#" class="menu-dropdown-link menu-close teal" id="azul">Azul</a>
-                                    <a href="#" class="menu-dropdown-link menu-close teal" id="violeta">Violeta</a>
-                                    <a href="#" class="menu-dropdown-link menu-close teal" id="rojo">Rojo</a>
-                                    <a href="#" class="menu-dropdown-link menu-close teal" id="amarillo">Amarillo</a>
+                                    <div class="menu-dropdown-link menu-close">
+                                        <div class="col-20" id="ejemplo1">
+                                            <img src="" class="encontrado" />
+                                        </div>
+                                        <div class="col-60">
+                                            <p id="picejemplo1" class="picname"></p>
+                                        </div>
+                                        <div class="col-20">
+                                            <a href="#" class="link left">
+                                                <i class="icon material-icons cardmenu col"
+                                                    id="editarnombrecito">edit</i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item-content">
+                                    <div class="menu-dropdown-link menu-close">
+                                        <div class="col-20" id="ejemplo1">
+                                            <img src="" class="encontrado" />
+                                        </div>
+                                        <div class="col-60">
+                                            <p id="picejemplo1" class="picname"></p>
+                                        </div>
+                                        <div class="col-20">
+                                            <a href="#" class="link left">
+                                                <i class="icon material-icons cardmenu col"
+                                                    id="editarnombrecito">edit</i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item-content">
+                                    <div class="menu-dropdown-link menu-close">
+                                        <div class="col-20" id="ejemplo1">
+                                            <img src="" class="encontrado" />
+                                        </div>
+                                        <div class="col-60">
+                                            <p id="picejemplo1" class="picname"></p>
+                                        </div>
+                                        <div class="col-20">
+                                            <a href="#" class="link left">
+                                                <i class="icon material-icons cardmenu col"
+                                                    id="editarnombrecito">edit</i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item-content">
+                                    <div class="menu-dropdown-link menu-close">
+                                        <div class="col-20" id="ejemplo1">
+                                            <img src="" class="encontrado" />
+                                        </div>
+                                        <div class="col-60">
+                                            <p id="picejemplo1" class="picname"></p>
+                                        </div>
+                                        <div class="col-20">
+                                            <a href="#" class="link left">
+                                                <i class="icon material-icons cardmenu col"
+                                                    id="editarnombrecito">edit</i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item-content">
+                                    <div class="menu-dropdown-link menu-close">
+                                        <div class="col-20" id="ejemplo1">
+                                            <img src="" class="encontrado" />
+                                        </div>
+                                        <div class="col-60">
+                                            <p id="picejemplo1" class="picname"></p>
+                                        </div>
+                                        <div class="col-20">
+                                            <a href="#" class="link left">
+                                                <i class="icon material-icons cardmenu col"
+                                                    id="editarnombrecito">edit</i>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </li>
                         </ul>
                     </div>
-                    <ul>
-                        <li class="item-content">
-                            <div class="item-inner">
-                                <div class="item-title column" id="ejemplo1"><img src="" class="encontrado row">
-                                    <p id="picejemplo1" class="picname textito2"></p>
-                                    <input id="nuevonombrecito" type="text" value="" class="oculto2 textito row">
-                                    <i class="icon material-icons md-only cardmenu" id="editarnombrecito">edit</i>
-                                    <i id="guardarnuevonombre"
-                                        class="oculto2 icon material-icons md-only row iconito">save</i>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="item-content">
-                            <div class="item-inner">
-                                <div class="item-title row" id="ejemplo2"><img src="" class="encontrado">
-                                    <p id="picejemplo2" class="textito"></p><input id="nuevonombrecito" type="text"
-                                        value="" class="oculto textito"><i
-                                        class="icon material-icons md-only cardmenu  iconito">edit</i><i
-                                        class="oculto icon material-icons md-only">save</i>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="item-content">
-                            <div class="item-inner">
-                                <div class="item-title row" id="ejemplo3"><img src="" class="encontrado">
-                                    <p id="picejemplo3" class=" textito"></p><i
-                                        class="icon material-icons md-only cardmenu  iconito">edit</i>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="item-content">
-                            <div class="item-inner">
-                                <div class="item-title row" id="ejemplo4"><img src="" class="encontrado">
-                                    <p id="picejemplo4" class=" textito"></p><i
-                                        class="icon material-icons md-only cardmenu iconito">edit</i>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="item-content">
-                            <div class="item-inner">
-                                <div class="item-title row" id="ejemplo5"><img src="" class="encontrado">
-                                    <p id="picejemplo5" class=" textito"></p><i
-                                        class="icon material-icons md-only cardmenu iconito">edit</i>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                    </br>
-                    <ul>
-                        <li><a class="list-button popup-close" href="#" id="guardar" data-view=".page-content"><i
-                                    class="icon material-icons md-only">save</i> Guardar</a></li>
-                    </ul>
+
                 </div>
+
+                <ul>
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title column" id="ejemplo1">
+                                <img src="" class="encontrado row">
+                                <p id="picejemplo1" class="picname textito2"></p>
+                                <input id="nuevonombrecito" type="text" value="" class="oculto2 textito row">
+                                <i class="icon material-icons md-only cardmenu" id="editarnombrecito">edit</i>
+                                <i id="guardarnuevonombre"
+                                    class="oculto2 icon material-icons md-only row iconito">save</i>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title row" id="ejemplo2"><img src="" class="encontrado">
+                                <p id="picejemplo2" class="textito"></p><input id="nuevonombrecito" type="text" value=""
+                                    class="oculto textito"><i
+                                    class="icon material-icons md-only cardmenu  iconito">edit</i><i
+                                    class="oculto icon material-icons md-only">save</i>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title row" id="ejemplo3"><img src="" class="encontrado">
+                                <p id="picejemplo3" class=" textito"></p><i
+                                    class="icon material-icons md-only cardmenu  iconito">edit</i>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title row" id="ejemplo4"><img src="" class="encontrado">
+                                <p id="picejemplo4" class=" textito"></p><i
+                                    class="icon material-icons md-only cardmenu iconito">edit</i>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title row" id="ejemplo5"><img src="" class="encontrado">
+                                <p id="picejemplo5" class=" textito"></p><i
+                                    class="icon material-icons md-only cardmenu iconito">edit</i>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                </br>
+
             </div>
         </div>
     </div>
+</div>
 </div>
