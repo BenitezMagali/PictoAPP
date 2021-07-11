@@ -67,6 +67,7 @@ var colAgendas;
 var email;
 var nuevoNombre;
 var usuario;
+var newname;
 //------------------------------------------------------------
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function () {
@@ -319,11 +320,18 @@ $$(document).on('page:init', '.page[data-name="agenda2"]', function (e) {
     }
   })
   //-------Modificar el nombre de cada pictograma
-  $$('i.iconito').on('click',function(){
-    //var ejemplos= [1,2,3,4,5];
-    for (i=1;)
-    $$('#ejemplo'+ejemplos).remove('p').add('input')
+  $$('#editarnombrecito').on('click',function(){
+    
+    $$('#picejemplo1').addClass('oculto2')
+    $$('#nuevonombrecito').removeClass('oculto2')
+    $$('#editarnombrecito').addClass('oculto2')
+    $$('#guardarnuevonombre').removeClass('oculto2').on('click',function(){
+      newname= $$('#nuevonombrecito').val()
+      $$('#hacer1').children('img').attr('alt',newname);
+      $$('#editarnombrecito').removeClass('oculto2')
+    })
   })
+
 //-----guardar todo en la basededatos------
   $$('#guardar').on('click', function () {
     var agendaAGuardar = {
@@ -378,6 +386,38 @@ $$(document).on('page:init', '.page[data-name="agenda2"]', function (e) {
       }
       )
   })
+$$('#playagenda').on('click',function(){
+  $$('#primeraetapa').addClass('oculto')
+  var posArriba = 0;
+  var posAbajo = 1;
+  $$('.picactual').on('click', function cambiopic() {
+    console.log("habemus click")
+    if (posAbajo <= 6) {
+      if (posArriba != 0) {
+        //mover lo que había a a fila de arriba (posArriba)
+        var srcHecho = $$('.picactual').children('img').attr('src')
+        $$('#hecho' + posArriba).children('img').attr('src', srcHecho)
+        posArriba++;
+      }
+      //agarra el elemento de abajo y lo pone en "haciendo" (posAbajo)
+      var srcDeLaImagen = $$('#hacer' + posAbajo).children('img').attr('src')
+      var textoDeLaImagen = $$('#hacer' + posAbajo).children('img').attr('alt')
+      $$('.picactual').children('img').attr('src', srcDeLaImagen)
+      $$('#texto-picto').text(textoDeLaImagen);
+
+      if (posAbajo == 6) {
+        $$('#picactual').attr('src', 'img/icons8-estrella-relleno.gif')
+        $$('#botonfinal').removeClass('oculto').addClass('visible')
+        $$('#texto-picto').text("¡Bien hecho!")
+      }
+      $$('#hacer' + posAbajo).children('img').attr('src', 'img/icons8-star-struck-48.png')
+      posAbajo++;
+      if (posArriba == 0) {
+        posArriba++;
+      }
+    }
+  })
+})
 
 })
 

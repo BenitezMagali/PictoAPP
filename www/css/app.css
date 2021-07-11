@@ -147,6 +147,9 @@ img{
 .oculto {
   display: none;
 }
+.oculto2{
+  display: none !important;
+}
 .visible {
   display: block;
   color: palevioletred;
@@ -187,6 +190,7 @@ img{
 .encontrado {
   width: 25px;
   display: flex;
+  float: left;
 }
 .picname {
   padding-left: 7vw;
@@ -210,8 +214,23 @@ img{
 .iconito{
   padding-top: 3vh;
   display: flex;
+  margin: 0%!important;
+  padding-left: 0%;
 }
 .menu{
   display: flex;
   float: right;
+}
+.textito{
+  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+  padding: 4% 0% 0% 5%!important;
+  float: left !important;
+  width: 70% !important;
+}
+.textito2{
+  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
 }
