@@ -4,10 +4,10 @@
     <div class="panel panel-left panel-cover panel-resizable panel-init">
         <div class="block">
             <p>Agendas</p>
-            <p><a class="panel-close" href="/agenda1/">Agenda diaria</a></p>
-            <p><a class="panel-close" href="#">Crear agenda</a></p>
-            <p><a class="panel-close" href="/registro/">Registrarse</a></p> 
-        </br>
+            <p><a class=" link popover-open" href="#" data-popover=".popover-about">Mis Agendas</a></p>
+            <p><a class=" link popover-open" href="#" data-popover=".popover-about2">Crear agenda</a></p>
+            <p><a class="panel-close" href="/registro/">Registrarse</a></p>
+            </br>
             <p><a class="panel-close" href="/index/">Volver al inicio</a></p>
         </div>
     </div>
@@ -32,10 +32,26 @@
             <a class="link" id="registro" href="/registro/" data-view='.page-content'>Registrarse</a>
         </div>
     </div>
-    <div id="botonfinal" class="oculto color-deeppurple fab fab-center-bottom fab-morph" data-morph-to=".toolbar" ><a href="#">
-        <i class="icon f7-icons md-only">rocket</i><i class="icon material-icons md-only">close</i></a></div>
-<!--Inicio del contenido de la página-->
+    <div id="botonfinal" class="oculto color-deeppurple fab fab-center-bottom fab-morph" data-morph-to=".toolbar"><a
+            href="#">
+            <i class="icon f7-icons md-only">rocket</i><i class="icon material-icons md-only">close</i></a></div>
+    <!--Inicio del contenido de la página-->
     <div class="page-content block block-strong">
+        <div class="popover popover-about2 panel-close">
+            <div class="popover-inner">
+                <div class="block">
+                    <p>Al registrarse se pueden editar las agendas, crear y subir contenido propio desde la galería o la
+                        cámara del celular</p>
+                </div>
+            </div>
+        </div>
+        <div class="popover popover-about panel-close">
+            <div class="popover-inner">
+                <div class="block">
+                    <p>Las agendas de los usuarios aparecen listadas aquí</p>
+                </div>
+            </div>
+        </div>
         <div class="hecho row no-gap">
 
             <div class="hecho1 card-header align-items-flex-end" id="hecho1"><img src="img/0.png"></div>
@@ -48,18 +64,24 @@
         <div class="haciendo col">
             <div class="picactual"><img id="picactual" src="img/icons8-play-64.png"></div>
             <div class="texto">
-                <p id='texto-picto'>¡EMPECEMOS!</p> <button id="escuchar"><i class="icon material-icons">hearing</i> </button>
+                <p id='texto-picto'>¡EMPECEMOS!</p> <button id="escuchar"><i class="icon material-icons">hearing</i>
+                </button>
             </div>
         </div>
         <div class="hacer row no-gap">
-            <div id="hacer1" class="hacer1 card-header align-items-flex-end"><img src="img/levantar de la cama.png" alt="Levantarse de la cama">
+            <div id="hacer1" class="hacer1 card-header align-items-flex-end"><img src="img/levantar de la cama.png"
+                    alt="Levantarse de la cama">
             </div>
-            <div id="hacer2" class="hacer1 card-header align-items-flex-end""><img src=" img/baño.png" alt="Ir al baño"></div>
-            <div id="hacer3" class="hacer1 card-header align-items-flex-end""><img src=" img/desayunar.png" alt="Desayunar"></div>
-            <div id="hacer4" class="hacer1 card-header align-items-flex-end""><img src=" img/videollamada.png" alt="Videollamada"></div>
-            <div id="hacer5" class="hacer1 card-header align-items-flex-end"><img src="img/jugar con el tablet.png" alt="Jugar"></div>
+            <div id="hacer2" class="hacer1 card-header align-items-flex-end""><img src=" img/baño.png" alt="Ir al baño">
+            </div>
+            <div id="hacer3" class="hacer1 card-header align-items-flex-end""><img src=" img/desayunar.png"
+                alt="Desayunar"></div>
+            <div id="hacer4" class="hacer1 card-header align-items-flex-end""><img src=" img/videollamada.png"
+                alt="Videollamada"></div>
+            <div id="hacer5" class="hacer1 card-header align-items-flex-end"><img src="img/jugar con el tablet.png"
+                    alt="Jugar"></div>
         </div>
-        
-         
+
+
     </div>
 </div>
