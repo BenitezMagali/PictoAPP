@@ -49,7 +49,7 @@ var app = new Framework7({
     {
       path: '/paginicio/',
       url: 'paginicio.html',
-      keepAlive: true,
+      //keepAlive: true,
     },
   ]
 });
@@ -271,7 +271,7 @@ $$(document).on('page:init', '.page[data-name="paginicio"]', function (e) {
     <div class="card-content card-content-padding">
         <a href="#" class="link right"><i
                 class="icon material-icons cardmenu" id="playagenda1">play_circle_filled</i></a><a href="#" class="link left"><i
-                class="icon material-icons cardmenu">edit</i></a>
+                class="icon material-icons cardmenu" id="editaragenda">edit</i></a>
     </div>
     </div>`
         var agendaenmenu = `
@@ -284,8 +284,8 @@ $$(document).on('page:init', '.page[data-name="paginicio"]', function (e) {
         $$('.accordion-item-content').children('.list').append(agendaenmenu);
       });
       $$('#playagenda1').on('click', function () {
-        var nombrecito = this.parentElement.parentElement.parentElement.children[0].innerText;
         $$('#primeraetapa').addClass('oculto2')
+        var nombrecito = this.parentElement.parentElement.parentElement.children[0].innerText;
         console.log("entré")
         editando = false;
         mainView.router.navigate('/agenda2/');
@@ -311,12 +311,17 @@ $$(document).on('page:init', '.page[data-name="paginicio"]', function (e) {
 
 
     })
+  $$('#editaragenda').on('click', function () {
+
+  })
 })
 
 //-------------------Agenda para personalizar-----------------------
 $$(document).on('page:init', '.page[data-name="agenda2"]', function (e) {
   if (editando == true) {
-
+    $$('#editarnombrecito').on('click', function(){
+      posLapiz=this.getAttribute('posLapiz')
+   })
     //----Buscar en SoyVisual----------------------------------------
     $$('.open-confirm').on('click', function () {
       app.dialog.confirm('Desgcargar material e importar desde galería?', 'Ir a #SoyVisual', function () {
@@ -329,24 +334,29 @@ $$(document).on('page:init', '.page[data-name="agenda2"]', function (e) {
     $$('#hacer1').on('click', function () {
       clickEn = 1;
       console.log('hice click en 1')
+      app.routes[5].keepAlive = true;
     })
 
     $$('#hacer2').on('click', function () {
       clickEn = 2;
       console.log('hice click en 2')
+      app.routes[5].keepAlive = true;
     })
 
     $$('#hacer3').on('click', function () {
       clickEn = 3;
       console.log('hice click en 3')
+      app.routes[5].keepAlive = true;
     })
     $$('#hacer4').on('click', function () {
       clickEn = 4;
       console.log('hice click en 4')
+      app.routes[5].keepAlive = true;
     })
     $$('#hacer5').on('click', function () {
       clickEn = 5;
       console.log('hice click en 5')
+      app.routes[5].keepAlive = true;
     })
 
     //---------Opciones en guardar agenda----
@@ -385,37 +395,46 @@ $$(document).on('page:init', '.page[data-name="agenda2"]', function (e) {
     //-------Modificar el nombre de cada pictograma
     $$('.open-prompt').on('click', function () {
       app.dialog.prompt('Nuevo texto de pictograma', 'Modificar texto', function (newname) {
-        var clicki= [1,2,3,4,5]
+
+        $$('#hacer'+posLapiz).children('img').attr('alt', newname);
+        $$('#picejemplo'+posLapiz).text(newname)
+
+
+      })
+    });
+    /*$$('.open-prompt').on('click', function () {
+      app.dialog.prompt('Nuevo texto de pictograma', 'Modificar texto', function (newname) {
+        var clicki = [1, 2, 3, 4, 5]
         switch (clicki) {
           case 1:
-            $$('#hacer'+clicki).children('img').attr('alt', newname);
-            $$('#picejemplo'+clicki).text(newname)
-            
+            $$('#hacer' + clicki).children('img').attr('alt', newname);
+            $$('#picejemplo' + clicki).text(newname)
+
             break;
-            case 2:
-            $$('#hacer'+clicki).children('img').attr('alt', newname);
-            $$('#picejemplo'+clicki).text(newname)
-            
+          case 2:
+            $$('#hacer' + clicki).children('img').attr('alt', newname);
+            $$('#picejemplo' + clicki).text(newname)
+
             break;
-            case 3:
-            $$('#hacer'+clicki).children('img').attr('alt', newname);
-            $$('#picejemplo'+clicki).text(newname)
-            
+          case 3:
+            $$('#hacer' + clicki).children('img').attr('alt', newname);
+            $$('#picejemplo' + clicki).text(newname)
+
             break;
-            case 4:
-            $$('#hacer'+clicki).children('img').attr('alt', newname);
-            $$('#picejemplo'+clicki).text(newname)
-            
+          case 4:
+            $$('#hacer' + clicki).children('img').attr('alt', newname);
+            $$('#picejemplo' + clicki).text(newname)
+
             break;
-            case 5:
-            $$('#hacer'+clicki).children('img').attr('alt', newname);
-            $$('#picejemplo'+clicki).text(newname)
+          case 5:
+            $$('#hacer' + clicki).children('img').attr('alt', newname);
+            $$('#picejemplo' + clicki).text(newname)
             break;
           default:
             break;
         }
-      })
-    });
+      })*/
+    //  });
     //-----guardar todo en la base de datos------
     $$('#guardar').on('click', function () {
       var agendaAGuardar = {
@@ -470,14 +489,18 @@ $$(document).on('page:init', '.page[data-name="agenda2"]', function (e) {
           console.log("no se creó nada")
         }
         )
+      var modifica = db.colAgendas(id_agenda)
+      return modifica.update({
+        id_agenda: true
+      }).then(() => { console.log("Nombre de agenda cambió") })
+        .catch((error) => {
+          console.log("Error al actualizar ", error);
+        })
     })
+    //------------Ejecutar una que todavía no se guardó en la BD
     $$('#playagenda').on('click', function () {
       $$('#primeraetapa').addClass('oculto')
-      var plus = $$('#hacer' + clickEn).children('img').attr('img', 'img/icons8-add-24.png')
-      if (plus == true) {
-        $$('#hacer' + clickEn).children('img').attr('img', 'img/0.png')
-      }
-
+  
       var posArriba = 0;
       var posAbajo = 1;
       $$('.picactual').on('click', function cambiopic() {
@@ -511,7 +534,8 @@ $$(document).on('page:init', '.page[data-name="agenda2"]', function (e) {
   } else
     if (editando == false) {
       //--------Traer de la BD la agenda guardada-------------
-      $$('#playagenda').on('click', function () {
+      app.routes[5].keepAlive = false;
+      $$('#playagenda1').on('click', function () {
         $$('#primeraetapa').addClass('oculto')
 
         var posArriba = 0;
@@ -545,18 +569,16 @@ $$(document).on('page:init', '.page[data-name="agenda2"]', function (e) {
         })
       })
     }
-    $$('#volver1').on('click', function () {
-      app.routes[5].keepAlive = false;
-      mainView.router.navigate('/paginicio/')
-    })
-    $$('#crearnuevo').on('click', function () {
-     app.routes[5].keepAlive = false;
-      mainView.router.refreshPage('/agenda2/');
-      editando=true;
-      app.routes[5].keepAlive=true;
-      mainView.router.refreshPage('/agenda2/');
-    })
+  $$('#volver1').on('click', function () {
+    app.routes[5].keepAlive = false;
+    mainView.router.navigate('/paginicio/')
   })
+  $$('#crearnuevo').on('click', function () {
+    editando = true;
+    //app.routes[5].keepAlive = false;
+    mainView.router.refreshPage('/agenda2/');
+  })
+})
 //-----------------Agenda precargargada para quienes se registran--------------------------------
 $$(document).on('page:init', '.page[data-name="agenda1-registrado"]', function (e) {
   var posArriba = 0;
@@ -597,6 +619,7 @@ $$(document).on('page:init', '.page[data-name="agenda1-registrado"]', function (
 //------------Página del buscador de pictos en ARASAAC-----------------
 $$(document).on('page:init', '.page[data-name="buscador"]', function (e) {
   console.log(e);
+  app.routes[5].keepAlive = true;
   var searchbar = app.searchbar.create({
     el: '.searchbar',
   })
@@ -605,6 +628,13 @@ $$(document).on('page:init', '.page[data-name="buscador"]', function (e) {
     var url = "https://api.arasaac.org/api/pictograms/es/search/" + buscando;
     app.request.json(url, function (encontrados) {
       console.log(encontrados)
+      if (encontrados.length == 0) {
+        app.toast.create({
+          text: "No se encontró pictograma. Modifica la palabra",
+          closeTimeout: 3000,
+          position: 'center'
+        }).open();
+      }
       for (i = 0; i <= encontrados.length; i++) {
         id = encontrados[i]._id;
         urlImagen = "https://static.arasaac.org/pictograms/" + id + "/" + id + "_500.png"
