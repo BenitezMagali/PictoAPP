@@ -51,11 +51,6 @@ var app = new Framework7({
       url: 'paginicio.html',
       keepAlive: true,
     },
-    {
-      path: '/guardar/',
-      url: 'guardar.html',
-      keepAlive: true,
-    }
   ]
 });
 
@@ -76,6 +71,7 @@ var newname;
 var nombredeagenda;
 var id_agenda;
 var pictosrecatados;
+var editando;
 //------------------------------------------------------------
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function () {
@@ -258,6 +254,11 @@ $$(document).on('page:init', '.page[data-name="paginicio"]', function (e) {
         // An error happened.
       });
   })
+  $$('#crearagendanueva').on('click', function () {
+    editando = true
+    mainView.router.navigate('/agenda2/')
+    mainView.router.refreshPage('/agenda2/')
+  })
   db = firebase.firestore();
   colAgendas = db.collection("agendas");
   colAgendas.where("usuario", "==", email).get()
@@ -268,7 +269,7 @@ $$(document).on('page:init', '.page[data-name="paginicio"]', function (e) {
         var agendadelusuario = `
     <div class="`+ colordeagenda + `"><p class="cardmenu">` + nombredeagenda + `</p>
     <div class="card-content card-content-padding">
-        <a href="/agenda2/" class="link right"><i
+        <a href="#" class="link right"><i
                 class="icon material-icons cardmenu" id="playagenda1">play_circle_filled</i></a><a href="#" class="link left"><i
                 class="icon material-icons cardmenu">edit</i></a>
     </div>
@@ -286,27 +287,36 @@ $$(document).on('page:init', '.page[data-name="paginicio"]', function (e) {
         var nombrecito = this.parentElement.parentElement.parentElement.children[0].innerText;
         $$('#primeraetapa').addClass('oculto2')
         console.log("entré")
+        editando = false;
+        mainView.router.navigate('/agenda2/');
         colAgendas.where("nombre", "==", nombrecito).get()
-          .then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-              $$('#tituloagenda').text(nombrecito)
-              pictosrecatados = doc.data().pictogramas;
-              for (i = 0; i < 5; i++) {
-                $$('hacer' + (i + 1)).children('img').attr('src', pictosrecatados[i])
-              }
-            })
-            mainView.router.navigate('/agenda2/');
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            pictosrecatados = doc.data().pictogramas;
+            $$('#tituloagenda').text(nombrecito)
+            for (i = 0; i < 5; i++) {
+              $$('#hacer' + (i + 1)).children('img').attr('src', pictosrecatados[i].foto).removeClass('pq')
+              $$('#hacer' + (i + 1)).children('img').attr('alt', pictosrecatados[i].texto).removeClass('pq')
+              console.log(pictosrecatados[i])
+            }
+            
           })
-      })
-        .catch(function (error) {
+        })
+        .catch((error) => {
           console.log(error.code)
         })
+      })
+      
 
 
 
     })
-  //-------------------Agenda para personalizar-----------------------
-  $$(document).on('page:init', '.page[data-name="agenda2"]', function (e) {
+})
+
+//-------------------Agenda para personalizar-----------------------
+$$(document).on('page:init', '.page[data-name="agenda2"]', function (e) {
+  if (editando == true) {
+  
     //----Buscar en SoyVisual----------------------------------------
     $$('.open-confirm').on('click', function () {
       app.dialog.confirm('Desgcargar material e importar desde galería?', 'Ir a #SoyVisual', function () {
@@ -315,6 +325,7 @@ $$(document).on('page:init', '.page[data-name="paginicio"]', function (e) {
     });
 
     //----Buscar en ARASAAC ---------------------------------------
+ 
     $$('#hacer1').on('click', function () {
       clickEn = 1;
       console.log('hice click en 1')
@@ -337,6 +348,7 @@ $$(document).on('page:init', '.page[data-name="paginicio"]', function (e) {
       clickEn = 5;
       console.log('hice click en 5')
     })
+    
     //---------Opciones en guardar agenda----
     $$('#nombreagenda').on('change', function () {
       nuevoNombre = $$('#nombreagenda').val();
@@ -475,43 +487,89 @@ $$(document).on('page:init', '.page[data-name="paginicio"]', function (e) {
         }
       })
     })
-    //--------Traer de la BD la agenda guardada-------------
+  } else
+    if (editando == false) {
+      //--------Traer de la BD la agenda guardada-------------
+      $$('#playagenda').on('click', function () {
+        $$('#primeraetapa').addClass('oculto')
+  
+      var posArriba = 0;
+      var posAbajo = 1;
+      $$('.picactual').on('click', function cambiopic() {
+        console.log("habemus click")
+        if (posAbajo <= 6) {
+          if (posArriba != 0) {
+            //mover lo que había a a fila de arriba (posArriba)
+            var srcHecho = $$('.picactual').children('img').attr('src')
+            $$('#hecho' + posArriba).children('img').attr('src', srcHecho)
+            posArriba++;
+          }
+          //agarra el elemento de abajo y lo pone en "haciendo" (posAbajo)
+          var srcDeLaImagen = $$('#hacer' + posAbajo).children('img').attr('src')
+          var textoDeLaImagen = $$('#hacer' + posAbajo).children('img').attr('alt')
+          $$('.picactual').children('img').attr('src', srcDeLaImagen)
+          $$('#texto-picto').text(textoDeLaImagen);
 
-    var posArriba = 0;
-    var posAbajo = 1;
-    $$('.picactual').on('click', function cambiopic() {
-      console.log("habemus click")
-      if (posAbajo <= 6) {
-        if (posArriba != 0) {
-          //mover lo que había a a fila de arriba (posArriba)
-          var srcHecho = $$('.picactual').children('img').attr('src')
-          $$('#hecho' + posArriba).children('img').attr('src', srcHecho)
-          posArriba++;
+          if (posAbajo == 6) {
+            $$('#picactual').attr('src', 'img/icons8-estrella-relleno.gif')
+            $$('#botonfinal').removeClass('oculto').addClass('visible')
+            $$('#texto-picto').text("¡Bien hecho!")
+          }
+          $$('#hacer' + posAbajo).children('img').attr('src', 'img/icons8-star-struck-48.png')
+          posAbajo++;
+          if (posArriba == 0) {
+            posArriba++;
+          }
         }
-        //agarra el elemento de abajo y lo pone en "haciendo" (posAbajo)
-        var srcDeLaImagen = $$('#hacer' + posAbajo).children('img').attr('src')
-        var textoDeLaImagen = $$('#hacer' + posAbajo).children('img').attr('alt')
-        $$('.picactual').children('img').attr('src', srcDeLaImagen)
-        $$('#texto-picto').text(textoDeLaImagen);
-
-        if (posAbajo == 6) {
-          $$('#picactual').attr('src', 'img/icons8-estrella-relleno.gif')
-          $$('#botonfinal').removeClass('oculto').addClass('visible')
-          $$('#texto-picto').text("¡Bien hecho!")
-        }
-        $$('#hacer' + posAbajo).children('img').attr('src', 'img/icons8-star-struck-48.png')
-        posAbajo++;
-        if (posArriba == 0) {
-          posArriba++;
-        }
-      }
+      })
+      $$('#volver1').on('click', function(){
+        app.routes[5].keepAlive=false;
+        mainView.router.navigate('/paginicio/')
+      })
+      $$('#crearnuevo').on('click',function(){
+        app.routes[5].keepAlive=false;
+        mainView.router.refreshPage('/agenda2/');
+      })
     })
-  })
-  $$('#volver1').on('click', function () {
+    }
+})
+//-----------------Agenda precargargada para quienes se registran--------------------------------
+$$(document).on('page:init', '.page[data-name="agenda1-registrado"]', function (e) {
+  var posArriba = 0;
+  var posAbajo = 1;
+  $$('.picactual').on('click', function cambiopic() {
+    console.log("habemus click")
+    if (posAbajo <= 6) {
+      if (posArriba != 0) {
+        //mover lo que había a a fila de arriba (posArriba)
+        var srcHecho = $$('.picactual').children('img').attr('src')
+        $$('#hecho' + posArriba).children('img').attr('src', srcHecho)
+        posArriba++;
+      }
+      //agarra el elemento de abajo y lo pone en "haciendo" (posAbajo)
+      var srcDeLaImagen = $$('#hacer' + posAbajo).children('img').attr('src')
+      var textoDeLaImagen = $$('#hacer' + posAbajo).children('img').attr('alt')
+      $$('.picactual').children('img').attr('src', srcDeLaImagen)
+      $$('#texto-picto').text(textoDeLaImagen);
 
+      if (posAbajo == 6) {
+        $$('#picactual').attr('src', 'img/icons8-estrella-relleno.gif')
+        $$('#botonfinal').removeClass('oculto').addClass('visible')
+        $$('#texto-picto').text("¡Bien hecho!")
+      }
+      $$('#hacer' + posAbajo).children('img').attr('src', 'img/icons8-star-struck-48.png')
+      posAbajo++;
+      if (posArriba == 0) {
+        posArriba++;
+      }
+    }
+  })
+
+  $$('#volver').on('click', function(){
+    app.routes[5].keepAlive=false;
+    mainView.router.navigate('/paginicio/')
   })
 })
-
 //------------Página del buscador de pictos en ARASAAC-----------------
 $$(document).on('page:init', '.page[data-name="buscador"]', function (e) {
   console.log(e);
