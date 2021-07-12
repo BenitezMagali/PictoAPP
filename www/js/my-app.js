@@ -354,6 +354,7 @@ $$(document).on('page:init', '.page[data-name="agenda2"]', function (e) {
     $$('#nombreagenda').on('change', function () {
       nuevoNombre = $$('#nombreagenda').val();
       $$('#nuevonomb').text(nuevoNombre);
+      $$('#tituloagenda').text(nuevoNombre)
     })
     $$('.menu-dropdown-link').on('click', function () {
       var color = this.id;
@@ -445,13 +446,13 @@ $$(document).on('page:init', '.page[data-name="agenda2"]', function (e) {
           console.log("no se creó nada")
         }
         )
-      var modifica = db.colAgendas(id_agenda)
+     /* var modifica = db.colAgendas(id_agenda)
       return modifica.update({
         id_agenda: true
       }).then(() => { console.log("Nombre de agenda cambió") })
         .catch((error) => {
           console.log("Error al actualizar ", error);
-        })
+        })*/
     })
     //------------Ejecutar una que todavía no se guardó en la BD
     $$('#playagenda').on('click', function () {
@@ -491,7 +492,7 @@ $$(document).on('page:init', '.page[data-name="agenda2"]', function (e) {
     if (editando == false) {
       //--------Traer de la BD la agenda guardada-------------
       app.routes[5].keepAlive = false;
-      $$('#playagenda1').on('click', function () {
+      $$('#playagenda').on('click', function () {
         $$('#primeraetapa').addClass('oculto')
 
         var posArriba = 0;
