@@ -84,7 +84,7 @@ $$(document).on('page:init', function (e) {
   console.log(e);
 
 })
-//------------------------Index---------------------------------------
+//*****************  Index  ***********************************************************
 $$(document).on('page:init', '.page[data-name="index"]', function (e) {
 
   $$('#login').on('click', function () {
@@ -101,7 +101,7 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
   })
 
 })
-//----------------------Página de inicio de sesión ----------------------------
+//*****************  Página de inicio de sesión ***************************************
 $$(document).on('page:init', '.page[data-name="login-screen"]', function (e) {
   app.navbar.hide('.navbar', true, false)
   $$('#volver').on('click', function () {
@@ -152,8 +152,7 @@ $$(document).on('page:init', '.page[data-name="login-screen"]', function (e) {
       });
   })
 })
-
-//-----------------------Página de registro---------------------------------
+//*****************  Página de registro ***********************************************
 $$(document).on('page:init', '.page[data-name="registro"]', function (e) {
   console.log("voy a intentar registrar al usuario")
   app.navbar.hide('.navbar', true, false)
@@ -199,8 +198,7 @@ $$(document).on('page:init', '.page[data-name="registro"]', function (e) {
     }
   })
 })
-
-// ----------Agenda pre-cargada para quienes ingresen sin loguearse-------
+//*****************   Agenda pre-cargada para quienes ingresen sin loguearse *********
 $$(document).on('page:init', '.page[data-name="agenda1"]', function (e) {
   console.log(e);
 
@@ -243,7 +241,7 @@ $$(document).on('page:init', '.page[data-name="agenda1"]', function (e) {
     })*/
   })
 })
-//----------------------Menú de inicio para registrados-------------------------
+// ****************   Menú de inicio para registrados ********************************
 $$(document).on('page:init', '.page[data-name="paginicio"]', function (e) {
   $$('#signout').on('click', function () {
     firebase.auth().signOut()
@@ -259,6 +257,7 @@ $$(document).on('page:init', '.page[data-name="paginicio"]', function (e) {
     mainView.router.navigate('/agenda2/')
     mainView.router.refreshPage('/agenda2/')
   })
+  //-------------------Mostrar las agendas guardadas en la BD-----------------------
   db = firebase.firestore();
   colAgendas = db.collection("agendas");
   colAgendas.where("usuario", "==", email).get()
@@ -267,13 +266,13 @@ $$(document).on('page:init', '.page[data-name="paginicio"]', function (e) {
         var colordeagenda = doc.data().color;
         nombredeagenda = doc.id;
         var agendadelusuario = `
-    <div class="`+ colordeagenda + `"><p class="cardmenu">` + nombredeagenda + `</p>
-    <div class="card-content card-content-padding">
+      <div class="`+ colordeagenda + `"><p class="cardmenu">` + nombredeagenda + `</p>
+      <div class="card-content card-content-padding">
         <a href="#" class="link right"><i
                 class="icon material-icons cardmenu" id="playagenda1">play_circle_filled</i></a><a href="#" class="link left"><i
                 class="icon material-icons cardmenu" id="editaragenda">edit</i></a>
-    </div>
-    </div>`
+      </div>
+      </div>`
         var agendaenmenu = `
           <div class="item-content">
             <div class="item-inner">
@@ -283,8 +282,10 @@ $$(document).on('page:init', '.page[data-name="paginicio"]', function (e) {
         $$('.page-content').append(agendadelusuario);
         $$('.accordion-item-content').children('.list').append(agendaenmenu);
       });
+      //------Ejecutar una agenda traída de la BD
       $$('#playagenda1').on('click', function () {
         $$('#primeraetapa').addClass('oculto2')
+
         var nombrecito = this.parentElement.parentElement.parentElement.children[0].innerText;
         console.log("entré")
         editando = false;
@@ -299,50 +300,41 @@ $$(document).on('page:init', '.page[data-name="paginicio"]', function (e) {
                 $$('#hacer' + (i + 1)).children('img').attr('alt', pictosrecatados[i].texto).removeClass('pq')
                 console.log(pictosrecatados[i])
               }
-
             })
           })
-          .catch((error) => {
-            console.log(error.code)
-          })
       })
-
-
-
-
+    })
+    .catch((error) => {
+      console.log(error.code)
     })
   $$('#editaragenda').on('click', function () {
 
   })
 })
-
-//-------------------Agenda para personalizar-----------------------
+//*****************   Agenda para personalizar ***************************************
 $$(document).on('page:init', '.page[data-name="agenda2"]', function (e) {
   if (editando == true) {
-    $$('#editarnombrecito').on('click', function(){
-      posLapiz=this.getAttribute('posLapiz')
-   })
+    $$('#editarnombrecito').on('click', function () {
+      posLapiz = this.getAttribute('posLapiz')
+    })
+    $$('#primeraetapa').removeClass('oculto')
     //----Buscar en SoyVisual----------------------------------------
     $$('.open-confirm').on('click', function () {
       app.dialog.confirm('Desgcargar material e importar desde galería?', 'Ir a #SoyVisual', function () {
         mainView.router.navigate()
       });
     });
-
     //----Buscar en ARASAAC ---------------------------------------
-
     $$('#hacer1').on('click', function () {
       clickEn = 1;
       console.log('hice click en 1')
       app.routes[5].keepAlive = true;
     })
-
     $$('#hacer2').on('click', function () {
       clickEn = 2;
       console.log('hice click en 2')
       app.routes[5].keepAlive = true;
     })
-
     $$('#hacer3').on('click', function () {
       clickEn = 3;
       console.log('hice click en 3')
@@ -358,13 +350,11 @@ $$(document).on('page:init', '.page[data-name="agenda2"]', function (e) {
       console.log('hice click en 5')
       app.routes[5].keepAlive = true;
     })
-
     //---------Opciones en guardar agenda----
     $$('#nombreagenda').on('change', function () {
       nuevoNombre = $$('#nombreagenda').val();
       $$('#nuevonomb').text(nuevoNombre);
     })
-
     $$('.menu-dropdown-link').on('click', function () {
       var color = this.id;
       switch (color) {
@@ -392,49 +382,15 @@ $$(document).on('page:init', '.page[data-name="agenda2"]', function (e) {
           break;
       }
     })
-    //-------Modificar el nombre de cada pictograma
+    //-------Modificar el nombre de cada pictograma-------- FUNCIONA
     $$('.open-prompt').on('click', function () {
       app.dialog.prompt('Nuevo texto de pictograma', 'Modificar texto', function (newname) {
 
-        $$('#hacer'+posLapiz).children('img').attr('alt', newname);
-        $$('#picejemplo'+posLapiz).text(newname)
-
-
+        $$('#hacer' + posLapiz).children('img').attr('alt', newname);
+        $$('#picejemplo' + posLapiz).text(newname)
       })
     });
-    /*$$('.open-prompt').on('click', function () {
-      app.dialog.prompt('Nuevo texto de pictograma', 'Modificar texto', function (newname) {
-        var clicki = [1, 2, 3, 4, 5]
-        switch (clicki) {
-          case 1:
-            $$('#hacer' + clicki).children('img').attr('alt', newname);
-            $$('#picejemplo' + clicki).text(newname)
-
-            break;
-          case 2:
-            $$('#hacer' + clicki).children('img').attr('alt', newname);
-            $$('#picejemplo' + clicki).text(newname)
-
-            break;
-          case 3:
-            $$('#hacer' + clicki).children('img').attr('alt', newname);
-            $$('#picejemplo' + clicki).text(newname)
-
-            break;
-          case 4:
-            $$('#hacer' + clicki).children('img').attr('alt', newname);
-            $$('#picejemplo' + clicki).text(newname)
-
-            break;
-          case 5:
-            $$('#hacer' + clicki).children('img').attr('alt', newname);
-            $$('#picejemplo' + clicki).text(newname)
-            break;
-          default:
-            break;
-        }
-      })*/
-    //  });
+    
     //-----guardar todo en la base de datos------
     $$('#guardar').on('click', function () {
       var agendaAGuardar = {
@@ -500,7 +456,7 @@ $$(document).on('page:init', '.page[data-name="agenda2"]', function (e) {
     //------------Ejecutar una que todavía no se guardó en la BD
     $$('#playagenda').on('click', function () {
       $$('#primeraetapa').addClass('oculto')
-  
+
       var posArriba = 0;
       var posAbajo = 1;
       $$('.picactual').on('click', function cambiopic() {
@@ -579,7 +535,7 @@ $$(document).on('page:init', '.page[data-name="agenda2"]', function (e) {
     mainView.router.refreshPage('/agenda2/');
   })
 })
-//-----------------Agenda precargargada para quienes se registran--------------------------------
+//*****************  Agenda precargargada para quienes se registran ******************
 $$(document).on('page:init', '.page[data-name="agenda1-registrado"]', function (e) {
   var posArriba = 0;
   var posAbajo = 1;
@@ -616,7 +572,7 @@ $$(document).on('page:init', '.page[data-name="agenda1-registrado"]', function (
     mainView.router.navigate('/paginicio/')
   })
 })
-//------------Página del buscador de pictos en ARASAAC-----------------
+//***************** Página del buscador de pictos en ARASAAC *************************
 $$(document).on('page:init', '.page[data-name="buscador"]', function (e) {
   console.log(e);
   app.routes[5].keepAlive = true;
